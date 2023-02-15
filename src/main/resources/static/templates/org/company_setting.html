@@ -1,0 +1,281 @@
+<div layout="row" layout-xs="column" layout-sm="column" layout-align="center center" ng-show="employeePrivileges.readCompanySettings">
+
+	<div flex="5">&nbsp;</div>
+	
+	<div flex>
+		<form novalidate name="companySettingsForm" ng-submit="addCompany($event)">
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'COMPANY_SETTINGS' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'COMPANY_NAME' | translate}}</label>
+							<input name="companyName" ng-model="company.companyName" type="text" required>
+							<div ng-messages="companySettingsForm.companyName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'FOUNDATION_DATE' | translate}}</label>
+							<md-datepicker name="foundedDate" ng-model="company.foundedDate"/>
+							<div ng-messages="companySettingsForm.foundedDate.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'PROPREITOR_NAME' | translate}}</label>
+							<input name="propriotorName" ng-model="company.propriotorName" type="text" required>
+							<div ng-messages="companySettingsForm.propriotorName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'FINANCIAL_YEAR' | translate}}</label> 
+							<md-datepicker name="financialYearStartsFrom" ng-model="company.financialYearStartsFrom"  required/>
+							<div ng-messages="companySettingsForm.financialYearStartsFrom.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'REG' | translate}}</label>
+							<input name="registrationNo" ng-model="company.registrationNo" type="text">
+							<div ng-messages="companySettingsForm.registrationNo.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'VAT' | translate}}</label> 
+							<input name="vatNo" ng-model="company.vatNo" type="text">
+							<div ng-messages="companySettingsForm.vatNo.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'CONTACT_INFORMATION' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CONTACT_PERSON_NAME' | translate}}</label>
+							<input name="contactPersonName" ng-model="company.companyPhysicalAddress.contactPersonName" type="text" required>
+							<div ng-messages="companySettingsForm.contactPersonName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ADDRESS_LINE_1' | translate}}</label>
+							<input name="addressLine1" ng-model="company.companyPhysicalAddress.addressLine1" type="text" required>
+							<div ng-messages="companySettingsForm.addressLine1.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ADDRESS_LINE_2' | translate}}</label>
+							<input name="addressLine2" ng-model="company.companyPhysicalAddress.addressLine2" type="text">
+							<div ng-messages="companySettingsForm.addressLine2.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'COUNTRY' | translate}}</label>
+							<md-select placeholder="{{'SELECT_COUNTRY' | translate}}" name="country" ng-model="company.companyPhysicalAddress.addressCountry"  type="text" required>
+							  <md-option ng-value="con" ng-selected="company.companyPhysicalAddress.addressCountry.id==con.id" ng-repeat="con in response.content">{{con.niceName}}</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.addressCountry.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CITY' | translate}}</label>
+							<input name="city" ng-model="company.companyPhysicalAddress.city" type="text" required  >
+							<div ng-messages="companySettingsForm.city.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ZIP' | translate}}</label>
+							<input name="zip" ng-model="company.companyPhysicalAddress.zip" type="text" >
+							<div ng-messages="companySettingsForm.zip.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container>
+						  <label>{{'COUNTRY' | translate}}</label>
+							<md-select placeholder="{{'SELECT_COUNTRY' | translate}}" name="country" ng-model="tempcompany.companyPhysicalAddress.phoneCodeForPhone" ng-change="SelectedCountryForPhone(con.phoneCode)" type="text" >
+							  <md-option ng-value="con"  ng-selected="company.companyPhysicalAddress.addressCountry.id==con.id" ng-repeat="con in response.content">{{con.niceName}} (+{{con.phoneCode}})</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.addressCountry.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'PHONE' | translate}}</label>
+							<input name="phone" ng-model="company.companyPhysicalAddress.phone" type="text">
+							<div ng-messages="companySettingsForm.phone.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>	
+
+						<md-input-container class="md-block" flex="100">
+							<label>{{'FAX' | translate}}</label>
+							<input name="fax" ng-model="company.companyPhysicalAddress.fax" type="text" placeholder="Ex. +8802000000">
+							<div ng-messages="companySettingsForm.fax.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">	
+						<md-input-container class="md-block" flex="100">
+							<label>{{'MOBILE' | translate}}</label>
+							<input name="mobilePhone" ng-model="company.companyPhysicalAddress.mobilePhone" type="text"  placeholder="Ex. +880710000000" required>
+							<div ng-messages="companySettingsForm.mobilePhone.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ALT_MOBILE' | translate}}</label>
+							<input name="altMobilePhone" ng-model="company.companyPhysicalAddress.altMobilePhone"  placeholder="Ex. +8801700000000" type="text">
+							<div ng-messages="companySettingsForm.altMobilePhone.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'EMAIL' | translate}}</label>
+							<input name="email" ng-model="company.companyPhysicalAddress.email" type="text">
+							<div ng-messages="companySettingsForm.email.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'WEBSITE' | translate}}</label>
+							<input name="website" ng-model="company.companyPhysicalAddress.website" type="text">
+							<div ng-messages="companySettingsForm.website.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'OTHER_SETTINGS' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'BASIC_CURRENCY_SYMBOL' | translate}}(i.e. $)</label>
+							<input name="baseCurrencySymbol" ng-model="company.baseCurrencySymbol" type="text" required>
+							<div ng-messages="companySettingsForm.baseCurrencySymbol.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'FORMAL_CURRENCY_NAME' | translate}}(i.e. Taka)</label> 
+							<input name="formalCurrencyName" ng-model="company.formalCurrencyName" type="text" required>
+							<div ng-messages="companySettingsForm.formalCurrencyName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'SYMBOL_SUFFIX_TO_AMOUNT' | translate}}</label>
+							<md-select placeholder="{{'SYMBOL_SUFFIX_TO_AMOUNT' | translate}}" name="currencySymbolSuffixToAmount" ng-model="company.currencySymbolSuffixToAmount" type="text" required>
+								<md-option value="true">Yes</md-option>
+								<md-option value="false">No</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.currencySymbolSuffixToAmount.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ADD_SPACE_SYMBOL_AMMOUNT' | translate}}</label>
+							<md-select placeholder="{{'ADD_SPACE_SYMBOL_AMMOUNT' | translate}}" name="addSpaceBetweenSymbolAndAmount" ng-model="company.addSpaceBetweenSymbolAndAmount" type="text" required>
+								<md-option value="true">YES</md-option>
+								<md-option value="false" >NO</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.addSpaceBetweenSymbolAndAmount.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'SHOW_AMOUNT_IN_MILLION' | translate}}</label>
+							<md-select placeholder="{{'SHOW_AMOUNT_IN_MILLION' | translate}}" name="showAmountInMillion" ng-model="company.showAmountInMillion" type="text" required>
+								<md-option value="true">YES</md-option>
+								<md-option value="false">NO</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.showAmountInMillion.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'NO_DECIMAL_PLACES' | translate}}</label> 
+							<input name="numberOfDecimalPlaces" ng-model="company.numberOfDecimalPlaces" type="text">
+							<div ng-messages="companySettingsForm.NumberOfDecimalPlaces.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'WORD_DEFINE_OF_DECIMAL_PLACES' | translate}}</label>
+							<input name="wordDefineForDecimalNumber" ng-model="company.wordDefineForDecimalNumber" type="text" required>
+							<div ng-messages="companySettingsForm.wordDefineForDecimalNumber.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container  class="md-block" flex="100">
+						  <label>{{'INVOICE_PAPER_TYPE' | translate}}</label>
+							<md-select placeholder="{{'INVOICE_PAPER_TYPE' | translate}}" name="paperType" ng-model="company.paperType.id" type="text" >
+							  <md-option ng-value="con.id" ng-selected="company.paperType.id==con.id" ng-repeat="con in paperType.content">{{con.name}}</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.paperType.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+			<div layout="row" ng-show="employeePrivileges.createCompanySettings || employeePrivileges.updateCompanySettings">
+				<md-button type="submit" class="md-raised md-primary" flex="100">{{'SUBMIT' | translate}}</md-button>
+			</div>
+		</form>
+	</div>
+	
+	<div flex="5">&nbsp;</div>
+</div>

@@ -1,0 +1,116 @@
+<md-dialog add-item-dialog flex>
+
+<md-dialog-content class="md-dialog-content" ng-show="selectedUnitType.name=='SIMPLE'">
+    
+    <h2 class="md-title"> {{'UPDATE_UNIT' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+
+      <form novalidate name="item.form" ng-submit="ctrl.updateItem()">
+      
+		 <div layout="row" class="input-row">
+	        <md-input-container flex>
+	          <label> {{'UNIT_SYMBLE' | translate}}</label>
+	          <input name="symbol"  ng-model="unit.symbol" md-maxlength="100" required>
+	           <div ng-messages="item.form.stockCategorySubmit.$error">
+			    <div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+			  </div>
+	        </md-input-container>
+        </div>
+        
+	     <div layout="row" class="input-row">
+	       <md-input-container flex>
+	         <label> {{'FORMAL_NAME' | translate}}</label>
+	         <input  name="formalName" ng-model="unit.formalName" md-maxlength="100"></textarea>
+	       </md-input-container>
+	     </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label> {{'DECIMEL_PLACES' | translate}}</label>
+          <input  name="numberOfDecimalPlaces" ng-model="unit.numberOfDecimalPlaces" md-maxlength="100"></textarea>
+        </md-input-container>
+      </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label> {{'DESCRIPTION' | translate}}</label>
+          <input rows="4" cols="50" name="description" ng-model="unit.description"></textarea>
+        </md-input-container>
+      </div>
+        
+	  <md-dialog-actions>
+	    <md-button class="md-raised md-primary" ng-click="ctrl.updateItem()" ng-disabled="item.form.$invalid"> {{'UPDATE_UNIT' | translate}}</md-button>
+	    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()"> {{'CANCEL' | translate}}</md-button>
+	  </md-dialog-actions>
+      
+    </form>
+  </md-dialog-content>
+  
+  <!-- ##########      SIMPLE vs COMPOUND - break     ########## -->
+
+  <md-dialog-content class="md-dialog-content" ng-show="selectedUnitType.name=='COMPOUND'">
+    
+    <h2 class="md-title"> {{'UPDATE_UNIT' | translate}} {{'COMPOUND' | translate}}</h2>
+    
+    <p ng-if="item.formC.$submitted && item.formC.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;   {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+      <form novalidate name="item.formC" ng-submit="ctrl.updateItem()">
+      
+      <div layout="row" class="input-row"><!-- test {{unit.firstUnit.id}} -->
+        <md-input-container class="md-block" flex="100">
+			<label>{{'FIRST_UNIT' | translate}}</label>
+				<md-select name="unitType" ng-model="unit.firstUnit"  type="text" required>
+				  <md-option ng-value="un.id" ng-selected="{{unit.firstUnit.id==un.id}}" ng-repeat="un in response.content" ng-show="{{un.symbol != null}}">{{un.formalName}}</md-option>
+				</md-select>
+				<div ng-messages="item.formC.unitType.$error">
+					<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+				</div>
+		</md-input-container>
+      </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label>{{'OF' | translate}}</label>
+          <input  name="numberOfDecimalPlaces" ng-model="unit.value" md-maxlength="10" md-minlength="1" required></textarea>
+        </md-input-container>
+      </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container class="md-block" flex="100">
+			<label>{{'SECOND_UNIT' | translate}}</label>
+				<md-select name="unitType" ng-model="unit.secondUnit"  type="text" ng-change="onSelectUnitType(selectedunitType)" required>
+				  <md-option ng-value="un.id"  ng-selected="{{unit.secondUnit.id==un.id}}" ng-repeat="un in response.content" ng-show="{{un.symbol != null}}">{{un.formalName}}</md-option>
+				</md-select>
+				<div ng-messages="item.formC.unitType.$error">
+					<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+				</div>
+		</md-input-container>
+      </div>
+      
+       <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label>{{'DESCRIPTION' | translate}}</label>
+          <input name="description" ng-model="unit.description"></textarea>
+        </md-input-container>
+      </div>
+      
+        
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.updateItem()" ng-disabled="item.formC.$invalid">{{'UPDATE_UNIT' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+      
+    </form> 
+    
+  </md-dialog-content>
+  
+
+
+</md-dialog>

@@ -1,0 +1,33 @@
+<md-dialog add-item-dialog>
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title"> {{'EDIT' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.updateItem()">
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label>{{'NAME' | translate}}</label>
+          <input name="roleName" min="0" max="99" ng-model="employeeCategory.categoryName" required>
+        </md-input-container>
+      </div>
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label>{{'DESCRIPTION' | translate}}</label>
+          <textarea rows="4" cols="50" name="roleDescription" ng-model="employeeCategory.categoryDescription"></textarea>
+        </md-input-container>
+      </div>
+    </form>
+    
+  </md-dialog-content>
+
+  <div class="md-actions">
+    <md-button class="md-raised md-primary" ng-click="ctrl.updateItem()" ng-disabled="item.form.$invalid"> {{'UPDATE' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()"> {{'CANCEL' | translate}}</md-button>
+  </div>
+  
+</md-dialog>

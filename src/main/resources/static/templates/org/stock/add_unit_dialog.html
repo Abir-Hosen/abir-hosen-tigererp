@@ -1,0 +1,140 @@
+<md-dialog add-item-dialog flex>
+
+<md-dialog-content class="md-dialog-content" ng-show="selectedUnitType.name=='SIMPLE'">
+    
+    <h2 class="md-title"> {{'ADD' | translate}}  {{'UNIT_OF_MEASUREMENY' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+
+      <form novalidate name="item.form" ng-submit="ctrl.addItem()">
+      
+     	<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label> {{'SELECT_UNIT_TYPE' | translate}}</label>
+				<md-select name="unitType" ng-model="selectedunitType"  type="text" ng-change="onSelectUnitType(selectedunitType)">
+				  <md-option ng-value="con" ng-selected="{{1 == (con.id)}}" ng-repeat="con in unitType">{{con.name}}</md-option>
+				</md-select>
+				<div ng-messages="item.form.unitType.$error">
+					<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+				</div>
+			</md-input-container>
+		 </div>
+		 
+		 <div layout="row" class="input-row">
+	        <md-input-container flex>
+	          <label> {{'UNIT_SYMBLE' | translate}}</label>
+	          <input name="symbol"  ng-model="unit.symbol" md-maxlength="100" required>
+	           <div ng-messages="item.form.stockCategorySubmit.$error">
+			    <div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+			  </div>
+	        </md-input-container>
+        </div>
+        
+	     <div layout="row" class="input-row">
+	       <md-input-container flex>
+	         <label> {{'FORMAL_NAME' | translate}}</label>
+	         <input  name="formalName" ng-model="unit.formalName" md-maxlength="100"></textarea>
+	       </md-input-container>
+	     </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label> {{'DECIMEL_PLACES' | translate}}</label>
+          <input  name="numberOfDecimalPlaces" ng-model="unit.numberOfDecimalPlaces" md-maxlength="100" required></textarea>
+        </md-input-container>
+      </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label> {{'DESCRIPTION' | translate}}</label>
+          <input rows="4" cols="50" name="description" ng-model="unit.description"></textarea>
+        </md-input-container>
+      </div>
+        
+	  <md-dialog-actions>
+	    <md-button class="md-raised md-primary" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid"> {{'ADD' | translate}}</md-button>
+	    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()"> {{'CANCEL' | translate}}</md-button>
+	  </md-dialog-actions>
+      
+    </form>
+  </md-dialog-content>
+  
+  <!-- ##########      SIMPLE vs COMPOUND - break     ########## -->
+
+  <md-dialog-content class="md-dialog-content" ng-show="selectedUnitType.name=='COMPOUND'">
+    
+    <h2 class="md-title"> {{'ADD' | translate}}  {{'UNIT_OF_MEASUREMENY' | translate}} - {{'COMPOUND' | translate}}</h2>
+    
+    <p ng-if="item.formC.$submitted && item.formC.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+      <form novalidate name="item.formC" ng-submit="ctrl.addCItem()">
+      
+     	<div layout="row" class="input-row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'SELECT_UNIT_TYPE' | translate}}</label>
+				<md-select name="unitType" ng-model="selectedunitType"  type="text" ng-change="onSelectUnitType(selectedunitType)">
+				  <md-option ng-value="con" ng-selected="{{1 == (con.id)}}" ng-repeat="con in unitType">{{con.name}}</md-option>
+				</md-select>
+				<div ng-messages="item.formC.unitType.$error">
+					<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+				</div>
+			</md-input-container>
+		 </div>
+		 
+      <div layout="row" class="input-row">
+        <md-input-container class="md-block" flex="100">
+			<label>{{'FIRST_UNIT' | translate}}</label>
+				<md-select name="unitType" ng-model="unit.firstUnit.id"  type="text" required>
+				  <md-option ng-value="un.id" ng-repeat="un in response.content" ng-show="{{un.symbol != null}}">{{un.formalName}}</md-option>
+				</md-select>
+				<div ng-messages="item.formC.unitType.$error">
+					<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+				</div>
+		</md-input-container>
+      </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label>{{'OF' | translate}}</label>
+          <input  name="value" ng-model="unit.value" md-maxlength="10" md-minlength="1" required></textarea>
+        </md-input-container>
+      </div>
+      
+      <div layout="row" class="input-row">
+        <md-input-container class="md-block" flex="100">
+			<label> {{'SECOND_UNIT' | translate}}</label>
+				<md-select name="unitType" ng-model="unit.secondUnit.id"  type="text" ng-change="onSelectUnitType(selectedunitType)" required>
+				  <md-option ng-value="un.id" ng-repeat="un in response.content" ng-show="{{un.symbol != null}}">{{un.formalName}}</md-option>
+				</md-select>
+				<div ng-messages="item.formC.unitType.$error">
+					<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+				</div>
+		</md-input-container>
+      </div>
+      
+       <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label> {{'DESCRIPTION' | translate}}</label>
+          <input name="description" ng-model="unit.description"></textarea>
+        </md-input-container>
+      </div>
+      
+        
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.addCItem()" ng-disabled="item.formC.$invalid"> {{'ADD' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()"> {{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+      
+    </form> 
+    
+  </md-dialog-content>
+  
+
+
+</md-dialog>

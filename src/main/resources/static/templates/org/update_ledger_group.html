@@ -1,0 +1,60 @@
+<md-dialog add-item-dialog flex>
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{'UPDATE' | translate}} {{'LEDGER_GROUP_SETTINGS' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp; {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.updateItem(ledgergroup)">
+	
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'NAME' | translate}}</label>
+							<input name="name" ng-model="ledgergroup.name" type="text" required>
+							<div ng-messages="item.form.name.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ALIUS' | translate}}</label>
+							<input name="alias" ng-model="ledgergroup.alias" type="text" required>
+							<div ng-messages="item.form.alias.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'DESCRIPTION' | translate}}</label>
+							<textarea name="description" ng-model="ledgergroup.description" type="text" required></textarea>
+							<div ng-messages="item.form.description.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'INDEX' | translate}}</label>
+							<input name="ledgerIndex" ng-model="ledgergroup.ledgerIndex" type="number" required></input>
+							<div ng-messages="item.form.ledgerIndex.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+
+    </form>
+    
+  </md-dialog-content>
+  
+
+  <div class="md-actions">
+    <md-button class="md-raised md-primary" ng-click="ctrl.updateItem(ledgergroup)" ng-disabled="item.form.$invalid">{{'UPDATE' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </div>
+  
+</md-dialog>

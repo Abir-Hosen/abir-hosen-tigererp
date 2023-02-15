@@ -1,0 +1,284 @@
+ <md-dialog add-item-dialog flex style="height: 100%; max-height=100%;">
+ 	<md-dialog-content class="md-dialog-content">
+  
+  		<md-content>
+		    <md-tabs class="md-raised" md-center-tabs md-dynamic-height>
+				<md-tab label="{{'ACCOUNT_INFORMATION' | translate}}">
+		        	<md-content class="md-padding" >
+						<h2 class="md-display-1"></h2>
+		          		<p class="md-body-1">
+					    <form name="item.form">
+							<h1 class="md-headline">{{'LEDGER' | translate}}</h1>
+							<md-divider/>
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'NAME' | translate}}</label>
+									<input name="accountName" ng-model="ledger.accountName" type="text" readonly>
+									<div ng-messages="item.form.accountName.$error">
+										<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+									</div>
+								</md-input-container>
+							</div>
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'ALIUS' | translate}}</label>
+									<input name="alius" ng-model="ledger.alius" type="text" readonly>
+								</md-input-container>
+							</div>
+							
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'PARENT_LEDGER' | translate}}</label>
+									<input name="parentAccount" ng-model="ledger.parentAccount.name"  type="text"  readonly>
+								</md-input-container>
+								<div ng-repeat="g in ledger.accountGroup">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'LEDGER_GROUP' | translate}}</label>
+									<input type="text" ng-model="g.name" readonly>
+								</md-input-container>
+								</div>
+							</div>
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'CREATION_DATE' | translate}}</label>
+									<md-datepicker name="creationDate" ng-model="ledger.creationDate" disabled/>
+								</md-input-container>
+								<md-input-container class="md-block" flex="100">
+									<label>{{'OPENING_BALANCE' | translate}}</label>
+									<input name="openingBalance" ng-model="ledger.openingBalance" type="text" readonly>
+								</md-input-container>
+							</div>
+							
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'FATHER_NAME' | translate}}</label>
+									<input name="fathersName" ng-model="ledger.fathersName" type="text" readonly>
+								</md-input-container>
+								<md-input-container class="md-block" flex="100">
+									<label>{{'MOTHER_NAME' | translate}}</label>
+									<input name="mothersName" ng-model="ledger.mothersName" type="text" readonly>
+								</md-input-container>
+							</div>
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'SPOUSE_NAME' | translate}}</label>
+									<input name="spouceName" ng-model="ledger.spouceName" type="text" readonly>
+								</md-input-container>
+								<md-input-container class="md-block" flex="100">
+									<label>{{ 'GENDER' | translate }}</label>
+									<input name="gender" ng-model="ledger.gender.name" type="text" readonly>
+								</md-input-container>
+							</div>
+							
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'DATE_OF_BIRTH' | translate}}</label>
+									<md-datepicker name="dob" ng-model="ledger.dob" md-placeholder="{{'SELECT_DATE' | translate}}" disabled/>
+								</md-input-container>
+								<md-input-container class="md-block" flex="100">
+									<label>{{'NID' | translate}}</label>
+									<input name="nid" ng-model="ledger.nid" type="text" readonly>
+								</md-input-container>
+							</div>
+							
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'DESCRIPTION' | translate}}</label>
+									<textarea name="description" ng-model="ledger.description" type="text" readonly></textarea>
+								</md-input-container>
+							</div>
+							<div layout="row">
+								<md-input-container class="md-block" flex="100">
+									<label>{{'SET_CREDIT_LIMIT' | translate}}</label>
+									<textarea name="accountLimit" ng-model="ledger.accountLimit" type="text" readonly></textarea>
+								</md-input-container>
+								<md-input-container class="md-block" flex="100">
+									<label>{{'CODE' | translate}}</label>
+									<textarea name="ledgerCode" ng-model="ledger.ledgerCode" type="text" readonly></textarea>
+								</md-input-container>
+							</div>
+								
+							<div ng-repeat="a in ledger.accountAddress">
+								<h1 class="md-headline">{{'CONTACT_INFORMATION' | translate}}</h1>
+								<md-divider/>
+								<div layout="row">
+									<md-input-container class="md-block" flex="100">
+										<label>{{'CONTACT_PERSON_NAME' | translate}}</label>
+										<input name="contactPersonName" ng-model="a.contactPersonName" type="text" required readonly>
+									</md-input-container>
+								</div>
+								<div layout="row">
+									<md-input-container class="md-block" flex="100">
+										<label>{{'ADDRESS_LINE_1' | translate}}</label>
+										<input name="addressLine1" ng-model="a.addressLine1" type="text" required readonly>
+									</md-input-container>
+								</div>
+								<div layout="row">
+									<md-input-container class="md-block" flex="100">
+										<label>{{'ADDRESS_LINE_2' | translate}}</label>
+										<input name="addressLine2" ng-model="a.addressLine2" type="text" readonly>
+									</md-input-container>
+								</div>
+								<div layout="row">
+									<md-input-container class="md-block" flex="100">
+										<label>{{'COUNTRY' | translate}}</label>
+										<input name="country" ng-model="a.addressCountry.niceName"  type="text"  readonly>
+									</md-input-container>
+								</div>
+								<div layout="row">
+									<md-input-container class="md-block" flex="100">
+										<label>{{'CITY' | translate}}</label>
+										<input name="city" ng-model="a.city" type="text"  readonly>
+									</md-input-container>
+								</div>
+								<div layout="row">
+									<md-input-container class="md-block" flex="100">
+										<label>{{'ZIP' | translate}}</label>
+										<input name="zip" ng-model="a.zip" type="text" readonly>
+									</md-input-container>
+								</div>
+
+
+								<div layout="row">
+									<md-input-container>
+									<label>{{'COUNTRY' | translate}}</label> 
+									<input name="country"ng-model="a.phone.country.niceName" type="text" readonly>
+									</md-input-container>
+									<md-input-container class="md-block" flex="100">
+									<label>{{'PHONE' | translate}}</label> 
+									<input name="phone" ng-model="a.phone.number" type="text" readonly>
+									</md-input-container>
+									<md-input-container> 		
+									<label>{{'COUNTRY' | translate}}</label> 
+									<input name="country" ng-model="a.fax.country.niceName" type="text" readonly>
+									</md-input-container>
+									<md-input-container class="md-block" flex="100">
+									<label>{{'FAX' | translate}}</label> 
+									<input name="fax" ng-model="a.fax.number" type="text" readonly>
+									</md-input-container>
+								</div>
+
+								<div layout="row">
+									<md-input-container>
+									<label>{{'COUNTRY' | translate}}</label> 
+									<input name="country" ng-model="a.mobilePhone.country.niceName" type="text" readonly> 
+									</md-input-container>
+									<md-input-container class="md-block" flex="100">
+									<label>{{'MOBILE' | translate}}</label> 
+									<input name="mobilePhone" ng-model="a.mobilePhone.number" type="text" readonly>
+									</md-input-container>
+									<md-input-container> 
+									<label>{{'COUNTRY' | translate}}</label> 
+									<input name="country" ng-model="a.altMobilePhone.country.niceName" type="text" readonly> 
+									</md-input-container>
+									<md-input-container class="md-block" flex="100">
+									<label>{{'ALT_MOBILE' | translate}}</label> 
+									<input name="altMobilePhone" ng-model="a.altMobilePhone.number" type="text" readonly>
+									</md-input-container>
+								</div>
+
+								<div layout="row">
+									<md-input-container class="md-block" flex="100">
+										<label>{{'EMAIL' | translate}}</label>
+										<input name="email" ng-model="a.email" type="text" readonly>
+									</md-input-container>
+									<md-input-container class="md-block" flex="100">
+										<label>{{'WEBSITE' | translate}}</label>
+										<input name="website" ng-model="a.website" type="text" readonly>
+									</md-input-container>
+								</div>
+							</div>
+					    </form>
+		        	</md-content>
+		      	</md-tab>
+				<md-tab label="{{'TRANSACTIONS' | translate}}" ng-click="fetchTransactions()">
+					<div layout="column" layout-align="space-between strech">
+						<div>
+							<md-toolbar class="md-table-toolbar md-default" ng-hide="filter.show">
+								<div class="md-toolbar-tools">
+									<h2 class="md-title">{{'TRANSACTIONS' | translate}}</h2>
+									<md-button class="md-icon-button" ng-click="reLoadStuff()">
+									<md-icon>refresh</md-icon> </md-button>
+									<md-datepicker ng-model="startDate" ng-change="onChangeDate()" md-max-date="maxDate" md-placeholder="{{'FROM' | translate}}"></md-datepicker>
+									<md-datepicker ng-model="endDate" ng-change="onChangeDate()" md-max-date="maxDate" md-placeholder="{{'TO' | translate}}"></md-datepicker>
+								</div>
+							</md-toolbar>
+							<md-toolbar class="md-table-toolbar md-default" ng-show="filter.show">
+								<div class="md-toolbar-tools">
+								</div>
+							</md-toolbar>
+						</div>
+						<div>
+							<md-content flex layout-padding>
+								<md-table-container>
+									<div style="overflow: auto; max-height: 100%;">
+										<table md-table md-row-select multiple md-progress="promise">
+											<thead fix-head md-head md-order="query.order" md-on-reorder="getResponse">
+												<tr md-row>
+													<th class="my-data-table-desc" md-column>{{ 'DATE' | translate}}</th>
+													<th class="my-data-table-desc" md-column>{{ 'LEDGER_ENTRIES_REFERENCE' | translate}}</th>
+													<th class="my-data-table-desc" md-column>{{ 'DESCRIPTION' | translate}}</th>
+													<th class="my-data-table-desc" md-column md-numeric>{{ 'DEBIT' | translate}}</th>
+													<th class="my-data-table-desc" md-column md-numeric>{{ 'CREDIT' | translate}}</th>
+													<th class="my-data-table-action" md-column  md-numeric>{{ 'BALANCE' | translate}}</th>
+												</tr>
+											</thead>
+
+											<tbody md-body>
+												<tr md-row md-select="row" md-select-id="id"
+													 ng-repeat="data in response.content">
+													<td class="my-data-table-desc" md-cell>{{data[0] | date:shortDate}}</td>
+													<td class="my-data-table-desc" md-cell>{{data[5]}}</td>
+													<td class="my-data-table-desc" md-cell>{{data[1]}}</td>
+													<td class="my-data-table-desc" md-cell>
+														<span ng-show="data[2]=='DEBIT'">{{data[3] | number : 2}}</span>
+														<span ng-show="data[2]=='CREDIT'">0.00</span>
+													</td>  
+													<td class="my-data-table-desc" md-cell>
+														<span ng-show="data[2]=='CREDIT'">{{data[3] | number : 2}}</span>
+														<span ng-show="data[2]=='DEBIT'">0.00</span>
+													</td>  
+													<td class="my-data-table-desc" md-cell>{{data[4] | number : 2}}</td>
+												</tr>
+												
+												<tr style="background-color:#e8e9fc;" ng-show="response.totalPages==query.page" md-row md-select="row" md-select-id="id">
+													<td class="my-data-table-desc" md-cell>{{response.content[s][0] | date:shortDate}}</td>
+													<td class="my-data-table-desc" md-cell colspan="4"><b>Total:</b></td>
+<!-- 													<td class="my-data-table-desc" md-cell>
+														<span ng-show="response.content[s][2]=='DEBIT'">{{response.content[s][3] | absolute}}</span>
+														<span ng-show="response.content[s][2]=='CREDIT'">0.00</span>
+													</td>  
+													<td class="my-data-table-desc" md-cell>
+														<span ng-show="response.content[s][2]=='CREDIT'">{{response.content[s][3] | absolute}}</span>
+														<span ng-show="response.content[s][2]=='DEBIT'">0.00</span>
+													</td>   -->
+													<td class="my-data-table-desc" md-cell style="text-align: right;"><b><span ng-show="response.content[s][4]!=0 ">{{response.content[s][4] | number : 2}}</span><span ng-show="!response.content[s][4] ">0.00</span></b></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</md-table-container>
+							</md-content>
+						</div>
+						<div>
+							<md-table-pagination md-limit="query.limit" md-limit-options="[20, 40, 60]" md-page="query.page"
+								md-boundary-links md-total="{{response.totalElements}}" md-on-paginate="getResponse" md-page-select>
+							</md-table-pagination>
+						</div>
+					</div>
+				</md-tab>
+			</md-tabs>
+
+				&nbsp;
+		</md-content>
+
+		<md-dialog-actions>
+			<md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CLOSE' | translate}}</md-button>
+		</md-dialog-actions>
+	</md-dialog-content>
+</md-dialog>
+
+
+
+
+

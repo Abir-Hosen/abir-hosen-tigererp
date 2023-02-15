@@ -1,0 +1,80 @@
+
+<md-dialog add-item-dialog class="min-dialog-width">
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{'EDIT' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp; {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.addItem()">
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'ROOM_SETTINGS' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ROOM_NAME' | translate}}</label>
+							<input name="roomName" ng-model="room.roomName" type="text" required>
+							<div ng-messages="item.form.roomName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ALIUS' | translate}}</label>
+							<input name="alius" ng-model="room.alius" type="text" required>
+							<div ng-messages="item.form.alius.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ROOM_NO' | translate}}</label>
+							<textarea name="roomName" ng-model="room.roomNumber" type="text" required></textarea>
+							<div ng-messages="item.form.roomName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'DESCRIPTION' | translate}}</label>
+							<textarea name="roomDescription" ng-model="room.roomDescription" type="text" required></textarea>
+							<div ng-messages="item.form.roomDescription.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+ 					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'BRANCH' | translate}}</label>
+							<md-select placeholder="{{'SELECT_BRANCH' | translate}}" name="branch" ng-model="room.branch.id"  type="text" required>
+							  <md-option ng-value="{{branch.id}}"  ng-selected="room.branch.id==branch.id" ng-repeat="branch in response.content">{{branch.branchName}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.branch.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+    </form>
+    
+  </md-dialog-content>
+  
+
+  <div class="md-actions">
+    <md-button class="md-raised md-primary" ng-click="ctrl.updateItem()" ng-disabled="item.form.$invalid">{{'UPDATE' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </div>
+  
+</md-dialog>

@@ -1,0 +1,186 @@
+<md-dialog flex><!--add-item-dialog  style="min-width: 800px" -->
+	<form name="item.form" ng-submit="ctrl.addItem()">
+
+		<md-progress-linear md-mode="indeterminate" ng-show="showProgressBar"></md-progress-linear>
+	
+		<md-dialog-content class="md-dialog-content">
+		
+			<md-content flex layout-padding style="overflow: auto; max-height: 100%;">
+				<md-table-container>
+					<table md-table md-row-select multiple ng-model="selected" md-progress="promise" style="background-color: #FFFFFF">
+					<!-- <table md-table md-row-select multiple ng-model="selected" md-progress="promise" border="1" style="border-color: gray;"> -->
+						<tbody fix-head md-head md-order="query.order" md-on-reorder="getResponse">
+						  <tr md-row md-select="column">
+						    <td><h3>{{'UPDATE_VOUCHER' | translate}}</h3></td>
+						  </tr>
+							<tr md-row md-select="column" md-select-id="id"><!-- class="md-whiteframe-1dp"   -->
+								<td>
+									<md-button class="md-primary" ng-click="isOpen = true">
+										<md-icon>today</md-icon> &nbsp;  {{'SELECT_CUSTOM_TRANSACTION_DATE' | translate}}:
+									</md-button>
+								</td>
+								<td>
+									<md-datepicker md-is-open="isOpen" ng-model="transactionDate" md-min-date="minDate" md-max-date="maxDate" md-placeholder="Transaction Date"></md-datepicker>
+								</td>
+								<td>
+									<md-input-container class="md-block" flex="100">
+										<label>{{'VOUCHER_TYPE' | translate}}</label>
+										<md-select name="voucherType" ng-model="voucherTypeId" type="text" required>
+										  <md-option ng-value="{{type.id}}" ng-selected="{{type.id==data[0].voucherType.id}}" ng-repeat="type in voucherType.content">{{type.name}}</md-option>
+										</md-select>
+										<div ng-messages="item.form.voucherType.$error">
+											<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+										</div>
+									</md-input-container>
+								</td>
+							</tr>
+							<tr style="height:50px;" md-row>
+								<th class="my-data-table-desc" md-column style="border-right: solid 1px #e5e5e5;">{{ 'PARTICULERS' | translate}}</th>
+								<th class="my-data-table-desc" md-column style="border-right: solid 1px #e5e5e5;"> &nbsp; {{ 'DEBIT' | translate}}</th>
+								<th class="my-data-table-desc" md-column> &nbsp; {{ 'CREDIT' | translate}}</th>
+							</tr>
+							<tr md-row md-select="column" md-select-id="id">
+								<td class="my-data-table-desc" md-cell style="border-right: solid 1px #e5e5e5;">
+									<div layout="row">
+										<md-autocomplete flex required
+											ng-selected="data[0].ledgerAccounts"
+											md-input-name="debitLedgerAccount"
+											md-selected-item="ctrl.selectedDebitLedgerAccount"
+											md-search-text="ctrl.searchString1"
+											md-selected-item-change="ctrl.selectedDebitLedgerAccountChanged()"
+											md-items="item in ledgerAccounts.content | orderBy : 'accountName'"
+											md-floating-label="{{'SELECT_DEBIT_ACCOUNT' | translate}}"
+											md-item-text="item.accountName">
+											<md-item-template>
+												<span md-highlight-text="ctrl.searchString1">{{item.accountName}}</span>
+											</md-item-template>
+											<div ng-messages="item.form.debitLedgerAccount.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-autocomplete>
+									</div>
+								<!--{{ctrl.debitLedgerAccount.accountName}} to check data-bind works or not! -->
+									<div layout="row">
+										<md-input-container class="md-block" flex="100">
+											<label>{{'DESCRIPTION' | translate}}</label>
+											<input name="debit_transection_description" ng-model="debit_transection_description" ng-value="data[0].transactions.description" type="text" required>
+											<div ng-messages="item.form.debit_transection_description.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-input-container>
+									</div>
+								</td>
+								<td class="my-data-table-desc" md-cell style="border-right: solid 1px #e5e5e5;">
+									<div layout="row">
+										<md-input-container class="md-block" flex="100">
+											<label>{{'DEBIT' | translate}}</label>
+											<input name="debit_transection_ammount" ng-model="debit_transection_ammount" ng-value="data[0].transactions.amount" type="number" required>
+											<div ng-messages="item.form.debit_transection_ammount.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-input-container>
+									</div>
+								</td>
+								<td class="my-data-table-desc" md-cell></td>
+							</tr>
+
+							<tr md-row md-select="column" md-select-id="id">
+								<td class="my-data-table-desc" md-cell style="border-right: solid 1px #e5e5e5;">
+									<div layout="row">
+										<md-autocomplete flex required
+											md-input-name="creditLedgerAccount"
+											md-selected-item="ctrl.selectedCreditLedgerAccount"
+											md-search-text="ctrl.searchString2"
+											md-selected-item-change="ctrl.selectedCreditLedgerAccountChanged()"
+											md-items="item in ledgerAccounts.content"
+											md-floating-label="{{'SELECT_CREDIT_ACCOUNT' | translate}}"
+											md-item-text="item.accountName">
+											<md-item-template>
+												<span md-highlight-text="ctrl.searchString2">{{item.accountName}}</span>
+											</md-item-template>
+											
+											<div ng-messages="item.form.creditLedgerAccount.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-autocomplete>
+									</div>
+									<!--{{ctrl.creditLedgerAccount.accountName}} to check data-bind works or not! -->
+									<div layout="row">
+										<md-input-container class="md-block" flex="100">
+											<label>{{'DESCRIPTION' | translate}}</label>
+											<input name="credit_transection_description" ng-model="credit_transection_description" ng-value="data[1].transactions.description" type="text" required>
+											<div ng-messages="item.form.credit_transection_description.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-input-container>
+									</div>
+								</td>
+								<td  class="my-data-table-desc" md-cell style="border-right: solid 1px #e5e5e5;"></td>
+								<td class="my-data-table-desc" md-cell>
+									<div layout="row">
+										<md-input-container class="md-block" flex="100">
+											<label>{{'CREDIT' | translate}}</label>
+											<input name="credit_transection_ammount" ng-model="credit_transection_ammount" ng-value="{{data[1].transactions.amount | absolute}}"  type="number" required>
+											<div ng-messages="item.form.credit_transection_ammount.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-input-container>
+									</div>
+								</td>
+							</tr>
+							<tr md-row md-select="column" md-select-id="id">
+								<td class="my-data-table-desc" md-cell style="border-right: solid 1px #e5e5e5;">
+									<div layout="row">
+<!-- 										<md-input-container class="md-block" flex="100">
+											<label>{{'Check_Transaction_Date' | translate}}</label>
+											<md-datepicker ng-model="transactionDate" md-min-date="minDate" md-max-date="maxDate" md-placeholder="Transaction Date"></md-datepicker>
+										</md-input-container> -->
+										<b>{{'CHECK_TOTAL' | translate}}: </b>
+									</div>
+								</td>
+								<td class="my-data-table-desc" md-cell style="border-right: solid 1px #e5e5e5;">
+									<div layout="row">
+										<md-input-container class="md-block" flex="100">
+											<label>{{'TOTAL_DEBIT' | translate}}</label>
+											<input name="debit_transection_ammount" ng-model="debit_transection_ammount" ng-value="data[0].transactions.amount"  type="number" disabled required>
+											<div ng-messages="item.form.debit_transection_ammount.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-input-container>
+									</div>
+								</td>
+								<td class="my-data-table-desc" md-cell>
+									<div layout="row">
+										<md-input-container class="md-block" flex="100">
+											<label>{{'TOTAL_CREDIT' | translate}}</label>
+											<input name="credit_transection_ammount" ng-model="credit_transection_ammount" ng-value="{{data[1].transactions.amount | absolute}}" type="number" disabled required>
+											<div ng-messages="item.form.credit_transection_ammount.$error">
+												<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+											</div>
+										</md-input-container>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<md-table-container>
+			</md-content>
+		
+		</md-dialog-content>
+	
+		<md-dialog-actions>
+			<md-button class="md-raised md-primary" ng-disabled="item.form.$invalid || credit_transection_ammount !=debit_transection_ammount || ctrl.selectedDebitLedgerAccount==ctrl.selectedCreditLedgerAccount" ng-click="ctrl.addItem()" >{{'UPDATE' | translate}}</md-button>
+			<md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+		</md-dialog-actions>
+	
+	</form>
+</md-dialog>
+
+
+
+
+
+
+
+
+

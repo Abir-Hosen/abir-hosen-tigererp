@@ -1,0 +1,259 @@
+<md-dialog add-item-dialog flex="noshrink" ><!-- style="min-width:40%;" -->
+
+	<md-progress-linear md-mode="indeterminate" ng-show="showProgressBar"></md-progress-linear>
+	<md-dialog-content class="md-dialog-content">
+	    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+			<i class="material-icons">error_outline</i>
+			<span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+	    </p>
+		<form name="item.form" ng-submit="ctrl.addItem()">
+			<md-card class="md-whiteframe-5dp">
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{ 'PURCHASE' | translate }}</label>
+							<md-datepicker name="orderDate" ng-model="p_order.orderDate" disabled/>
+							<div ng-messages="item.form.orderDate.$error">
+								<div ng-message="required">This is required.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'PURCHASE_LEDGER' | translate}}</label>
+							<md-select placeholder="{{'PURCHASE_LEDGER' | translate}}" name="orderAccounts" ng-model="p_order.orderAccounts.id" type="text" disabled>
+						  		<md-option ng-value="party_ledger.id" ng-repeat="party_ledger in partyLedger.content">{{party_ledger.accountName}}</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{ 'DELIVERY' | translate }}</label>
+							<md-datepicker name="deliveryDate" ng-model="p_order.deliveryDate" disabled/>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'SUPPLIER_INVOICE_NUMBER' | translate}}</label>
+							<input name="offlineInvoiceNumber" ng-model="p_order.offlineInvoiceNumber" type="text" disabled>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'PARTY_ACCOUNT_NAME' | translate}}</label>
+							<md-select placeholder="{{'PARTY_ACCOUNT_NAME' | translate}}" name="party" ng-model="p_order.party.id" type="text" required>
+						  		<md-option ng-hide="party_ledger.id==1 || party_ledger.id==3" ng-value="party_ledger.id" ng-repeat="party_ledger in partyLedger.content">{{party_ledger.accountName}}</md-option>
+							</md-select>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CURRENT_ACCOUNT_BALANCE' | translate}}</label>
+							<input name="currentAccountBalance" ng-value="balance" type="number" disabled>
+						</md-input-container>
+					</div>
+					
+				</md-card-content>
+			</md-card>
+					
+					
+					
+			<md-card class="md-whiteframe-5dp">
+				<md-card-content>
+					<div layout="row">
+						<md-content flex layout-padding>
+							<md-table-container>
+								<div style="overflow: auto; max-height: 100%;">
+									<table md-table>
+										<thead fix-head md-head>
+											<tr md-row>
+												<th class="my-data-table-desc" md-column> {{'NO' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'ITEM' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'GODOWN_AND_LOT' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'QTY' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'RATE' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'DISC(%)' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'AMOUNT' | translate}}</th>
+											</tr>
+										</thead>
+										
+										<tbody md-body>
+											<tr md-row ng-repeat="item in p_order.stockItems">
+												<td class="my-data-table-desc" md-cell>
+													{{item.stockItem.id}}
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<md-select placeholder="{{'ITEM' | translate}}" name=stockItem ng-model="p_order.stockItems[$index].stockItem.id" type="text" required>
+													  		<md-option ng-click="qType(item.unit.value)" ng-value="item[0].id" ng-repeat="item in Items.content">{{item[0].name}}</md-option>
+														</md-select>
+														<div ng-messages="item.form.stockItem.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell layout="column">
+													<md-input-container class="md-block" flex="100">													
+														<label>{{'BRANCH' | translate}}</label>
+														<input name="branch" ng-model="item.room.branch.branchName" type="text" disabled>
+													</md-input-container>
+													<md-input-container class="md-block" flex="100">													
+														<label>{{'ROOM' | translate}}</label>
+														<input name="room" ng-model="item.room.roomName" type="text" disabled>
+													</md-input-container>
+													<md-input-container class="md-block" flex="100">
+														<md-datepicker name="mfg"  md-placeholder="MFG" ng-model="p_order.stockItems[$index].batch.mfg" required/>
+														<div ng-messages="item.form.mfg.$error">
+															<div ng-message="required">This is required.</div>
+														</div>
+													</md-input-container>
+													<md-input-container class="md-block" flex="100">
+														<md-datepicker name="expDate"  md-placeholder="EXP" ng-model="p_order.stockItems[$index].batch.expDate" required/>
+														<div ng-messages="item.form.expDate.$error">
+															<div ng-message="required">This is required.</div>
+														</div>
+													</md-input-container>
+												</td>
+												
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<label>{{'QTY' | translate}}</label>
+														<input name="quantity" ng-change="updateBill()" ng-model="p_order.stockItems[$index].quantity" ng-value="{{p_order.stockItems[$index].quantity | absolute}}" min="1" step="{{step}}" type="text">
+														<div ng-messages="item.form.quantity.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<label>{{'RATE' | translate}}</label>
+														<input name="rate" ng-change="updateBill()" ng-model="p_order.stockItems[$index].rate" min="1" type="number" required>
+														<div ng-messages="item.form.rate.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<label>{{'DISC(%)' | translate}}</label>
+														<input name="discount" ng-change="updateBill()" ng-model="p_order.stockItems[$index].discount" min="0" max="100" ng-min="0" ng-max="100" type="number" required>
+														<div ng-messages="item.form.discount.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<label>{{'AMOUNT' | translate}}</label>
+														<input name="totalAmount" ng-model="p_order.stockItems[$index].totalAmount" 
+														ng-value="(p_order.stockItems[$index].rate*(1-p_order.stockItems[$index].discount/100))*p_order.stockItems[$index].quantity  | absolute" min="0" type="number" step="0.01" disabled>
+														<div ng-messages="item.form.totalAmount.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</md-table-container>
+						</md-content>
+					</div>
+				</md-card-content>
+			</md-card>
+		
+			<md-card class="md-whiteframe-5dp">
+				<md-card-content>
+					<div layout="row">
+						<md-content flex layout-padding>
+							<md-table-container>
+								<div style="overflow: auto; max-height: 100%;">
+									<table md-table>
+										<tbody md-body>
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell colspan="3">Total</td>
+												<td class="my-data-table-desc" md-cell colspan="2">{{totalQty}}</td>                        <!--  -->
+												<td class="my-data-table-desc" md-cell>{{totalDiscount | absolute | number:2}}</td>
+												<td class="my-data-table-desc" md-cell>{{p_order.totalAmount}}</td>
+											</tr><!-- 
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell>Previous Balance:</td>
+												<td class="my-data-table-desc" md-cell>{{balance}}</td>
+											</tr>
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell>Sub Total:</td>
+												<td class="my-data-table-desc" md-cell>{{subTotal}}</td>
+											</tr> -->
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell>Less Discount</td>
+												<td class="my-data-table-desc" md-cell>{{totalDiscount  | absolute | number:2}}</td>
+											</tr><!-- 
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell>Grand Total:</td>
+												<td class="my-data-table-desc" md-cell>{{grandTotal}}</td>
+											</tr> -->
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell>Paid Amount:</td>
+												<td class="my-data-table-desc" md-cell>{{p_order.paidAmount}}</td>
+											</tr>
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell></td>
+												<td class="my-data-table-desc" md-cell>Due Amount:</td>
+												<td class="my-data-table-desc" md-cell>{{dueAmount}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</md-table-container>
+						</md-content>
+					</div>
+				</md-card-content>
+			</md-card>
+
+			<md-card class="md-whiteframe-5dp">
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{ 'PAYMENT' | translate }}</label>
+							<md-datepicker name="nextPaymentDate" ng-model="p_order.nextPaymentDate" required/>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'NARATION' | translate}}</label>
+							<textarea name="description" rows="4" ng-model="p_order.description" type="text" required></textarea>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+		</form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+</md-dialog>

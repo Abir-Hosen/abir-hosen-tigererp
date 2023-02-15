@@ -1,0 +1,79 @@
+<div layout="column" layout-align="space-between strech" ng-show="employeePrivileges.readStockInSettings">
+<div>
+    <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
+  <div class="md-toolbar-tools">
+    <h2 class="md-title"> {{'STOCK_IN' | translate}}</h2>
+                <md-button class="md-icon-button" ng-click="reLoadStuff()">
+              <md-icon>refresh</md-icon>
+            </md-button>
+    <div flex></div>
+    <md-button class="md-icon-button" ng-click="filter.show = true">
+      <md-icon>search</md-icon>
+    </md-button>
+    <md-button class="md-icon-button" ng-click="addItem($event)" ng-show="employeePrivileges.createStockInSettings">
+      <md-icon>add_circleg</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="md-table-toolbar md-default" ng-show="filter.show && !selected.length">
+  <div class="md-toolbar-tools">
+    <md-icon>search</md-icon>
+    <form flex name="filter.form">
+      <input type="text" ng-model="query.filter" ng-model-options="filter.options" placeholder="search by Name/by Id">
+    </form>
+    <md-button class="md-icon-button" ng-click="removeFilter()">
+      <md-icon>close</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+  <div class="md-toolbar-tools" layout-align="space-between center">
+    <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
+    <md-button class="md-icon-button" ng-click="delete($event)">
+      <md-icon>delete</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+</div>
+ 
+ <div>
+	<md-content flex layout-padding>
+	  	<md-table-container>
+  <div style="overflow: auto; max-height: 100%;">
+  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+    <thead fix-head md-head md-order="query.order" md-on-reorder="getResponse">
+      <tr md-row>
+        <th class="my-data-table-id" md-column md-numeric md-order-by="id"><span> {{'ID' | translate}}</span></th>
+        <th class="my-data-table-desc" md-column> {{'ITEM' | translate}}</th>
+        <th class="my-data-table-name" md-column><span> {{'BRANCH' | translate}}</span></th>
+        <th class="my-data-table-name" md-column><span> {{'QUANTITY' | translate}}</span></th>
+        <th class="my-data-table-name" md-column><span> {{'RATE' | translate}}</span></th>
+        <th class="my-data-table-name" md-column><span> {{'DISC' | translate}}</span></th>
+        <th class="my-data-table-desc" md-column> {{'AMOUNT' | translate}}</th>
+        
+      </tr>
+    </thead>
+
+    <tbody md-body>
+      <tr md-row md-select="row" md-select-id="id"  ng-repeat="items in response.content">
+        <td md-cell class="my-data-table-id">{{items.id}}</td>
+        <td class="my-data-table-desc" md-cell><span ng-repeat="item in items.stockItems">{{item.stockItem.name}}<br><md-divider/></span></td>
+        <td class="my-data-table-name" md-cell><span ng-repeat="item in items.stockItems">room<br><md-divider/></span></td>
+        <td class="my-data-table-desc" md-cell><span ng-repeat="item in items.stockItems">{{item.quantity}}<br><md-divider/></span></td>
+        <td class="my-data-table-desc" md-cell><span ng-repeat="item in items.stockItems">{{item.rate | number :2}}<br><md-divider/></span></td>
+        <td class="my-data-table-desc" md-cell><span ng-repeat="item in items.stockItems">&nbsp;<br><md-divider/></span></td>
+        <td class="my-data-table-name" md-cell>{{items.totalAmount | number :2}}</td>
+      </tr>  
+    </tbody>
+  </table>
+  </div>
+</md-table-container>
+	</md-content>
+  </div>
+
+	<div>
+	  <md-table-pagination md-limit="query.limit" md-limit-options="[10, 20 , 30 ]" md-page="query.page" md-total="{{response.totalElements}}" md-on-paginate="getResponse" md-page-select></md-table-pagination>
+	</div>
+</div>

@@ -1,0 +1,217 @@
+<md-dialog add-item-dialog flex="noshrink" style="min-width: 90%;"><!-- style="min-width:40%;" -->
+	<md-progress-linear md-mode="indeterminate" ng-show="showProgressBar"></md-progress-linear>
+	<md-dialog-content class="md-dialog-content">
+		<h3>{{'ADD_PRODUCTION' | translate}}</h3>
+	    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+			<i class="material-icons">error_outline</i>
+			<span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+	    </p>
+		<form name="item.form" ng-submit="ctrl.addItem()">
+			
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{ 'PRODUCTION' | translate }}</label>
+							<md-datepicker name="orderDate" ng-model="p_order.orderDate" required/>
+							<div ng-messages="item.form.orderDate.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'PRODUCTION' | translate}}</label>
+							<md-select placeholder="{{'PRODUCTION' | translate}}" name="orderAccounts" ng-model="p_order.orderAccounts.id" type="text" disabled>
+						  		<md-option ng-selected="party_ledger.id==1" ng-value="party_ledger.id" ng-repeat="party_ledger in partyLedger.content">{{party_ledger.accountName}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.orderAccounts.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<!-- <div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{ 'DELIVERY' | translate }}</label>
+							<md-datepicker name="deliveryDate" ng-model="p_order.deliveryDate"/>
+							<div ng-messages="item.form.deliveryDate.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'INVOICE_NUMBER' | translate}}</label>
+							<input name="offlineInvoiceNumber" ng-model="p_order.offlineInvoiceNumber" type="text">
+							<div ng-messages="item.form.offlineInvoiceNumber.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div> -->
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CONSUMPTION' | translate}}</label>
+							<md-select placeholder="{{'CONSUMPTION' | translate}}" name="party" ng-model="p_order.party.id" type="text" disabled required>
+						  		<md-option ng-selected="party_ledger.id==5" ng-hide="party_ledger.id==1 || party_ledger.id==3" ng-value="party_ledger.id" ng-repeat="party_ledger in partyLedger.content">{{party_ledger.accountName}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.party.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CURRENT_ACCOUNT_BALANCE' | translate}}</label>
+							<input name="currentAccountBalance" ng-value="balance" type="number" disabled>
+						</md-input-container>
+					</div>					
+		
+					<div layout="row">
+						<md-content flex layout-padding>
+							<md-table-container>
+								<div style="overflow: auto; max-height: 100%;">
+									<table md-table>
+										<thead fix-head md-head>
+											<tr md-row>
+												<th class="my-data-table-desc" md-column> {{'NO' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'ITEM' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'GODOWN_AND_LOT' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'QTY' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'RATE' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'AMOUNT' | translate}}</th>
+												<th class="my-data-table-desc" md-column> {{'ERASE' | translate}}</th>
+											</tr>
+										</thead>
+										
+										<tbody md-body>
+											<tr md-row ng-repeat="item in stock">
+												<td class="my-data-table-desc" md-cell>
+													{{item}}
+													<md-input-container ng-hide="true" class="md-block" flex="100">
+														<md-select placeholder="{{'ITEM' | translate}}" name=productTransactionEntryType ng-model="p_order.stockItems[$index].productTransactionEntryType" type="text">
+													  		<md-option ng-selected="{{item.id==7}}" ng-value="item" ng-repeat="item in pteType.content">{{item.name}}</md-option>
+														</md-select>
+														<div ng-messages="item.form.productTransactionEntryType.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<md-select placeholder="{{'ITEM' | translate}}" name=stockItem ng-model="p_order.stockItems[$index].stockItem.id" type="text" required>
+													  		<md-option ng-click="qType(item.unit.value)" ng-value="item[0].id" ng-repeat="item in Items.content">{{item[0].name}}</md-option>
+														</md-select>
+														<div ng-messages="item.form.stockItem.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell layout="column"><!-- 
+													<span ng-click="addRoom()">Click to set Godown</span>
+													<span ng-click="addBatch()">Click to set Batch</span> -->
+													<md-input-container class="md-block" flex="100">
+														<md-select placeholder="{{'BRANCH' | translate}}" name="branches" ng-model="" type="text">
+													  		<md-option ng-click="getRooms(branch.id)" ng-value="" ng-repeat="branch in branches.content">{{branch.branchName}}</md-option>
+														</md-select>
+														<div ng-messages="item.form.branches.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+													<md-input-container class="md-block" flex="100">
+														<md-select placeholder="{{'ROOM' | translate}}" name="rooms" ng-model="p_order.stockItems[$index].room.id" type="text">
+													  		<md-option ng-value="room.id" ng-repeat="room in rooms.content">{{room.roomName}}</md-option>
+														</md-select>
+														<div ng-messages="item.form.rooms.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+													<md-input-container class="md-block" flex="100">
+														<md-datepicker name="mfg"  md-placeholder="{{'MFG' | translate}}" ng-model="p_order.stockItems[$index].batch.mfg"/>
+														<div ng-messages="item.form.mfg.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+													<md-input-container class="md-block" flex="100">
+														<md-datepicker name="expDate"  md-placeholder="{{'EXP' | translate}}" ng-model="p_order.stockItems[$index].batch.expDate"/>
+														<div ng-messages="item.form.expDate.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<label>{{'QTY' | translate}}</label>
+														<input name="quantity" ng-change="updateBill()" ng-model="p_order.stockItems[$index].quantity" min="0" step="{{step}}" type="number" required>
+														<div ng-messages="item.form.quantity.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<label>{{'RATE' | translate}}</label>
+														<input name="rate" ng-change="updateBill()" ng-model="p_order.stockItems[$index].rate" min="0" type="number" required>
+														<div ng-messages="item.form.rate.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-input-container class="md-block" flex="100">
+														<label>{{'AMOUNT' | translate}}</label>
+														<input name="totalAmount" ng-model="p_order.stockItems[$index].totalAmount" 
+														ng-value="(p_order.stockItems[$index].rate*p_order.stockItems[$index].quantity)" min="0" type="number" step="0.01" disabled>
+														<div ng-messages="item.form.totalAmount.$error">
+															<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+														</div>
+													</md-input-container>
+												</td>
+												<td class="my-data-table-desc" md-cell>
+													<md-button ng-click="subtractStockItemField($index)"  class="md-warn"><md-icon>remove_circle_outline</md-icon></md-button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+		
+					</div>
+					
+					<div layout="row">
+						<md-button ng-click="addStockItemField()" class="md-primary"><md-icon>playlist_add</md-icon>
+						&nbsp;{{'ADD' | translate}}</md-button>
+						<h2 flex md-truncate></h2>
+						<md-button ng-click="subtractStockItemField()"  class="md-warn"><md-icon>remove_circle_outline</md-icon>
+						&nbsp;{{'ERASE' | translate}}</md-button>
+					</div>
+		
+					<div layout="row">
+						<md-content flex layout-padding>
+							<md-table-container>
+								<div style="overflow: auto; max-height: 100%;">
+									<table md-table>
+										<tbody md-body>
+											<tr md-row>
+												<td class="my-data-table-desc" md-cell>{{'TOTAL_QTY' | translate}}</td>
+												<td class="my-data-table-desc" md-cell>{{totalQty}}</td>                        <!--  -->
+												<td class="my-data-table-desc" md-cell>{{'TOTAL_AMOUNT' | translate}}</td>
+												<td class="my-data-table-desc" md-cell>{{totalAmount}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+						
+					</div>
+				</md-card-content>
+			</md-card>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100 ">
+							<label>{{'NARATION' | translate}}</label>
+							<textarea name="description" rows="4" ng-model="p_order.description" type="text"></textarea>
+							<div ng-messages="item.form.description.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+			
+		</form>
+    
+	</md-dialog-content>
+  
+	<md-dialog-actions>
+    	<md-button class="md-raised md-primary" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid">{{'ADD_PRODUCTION' | translate}}</md-button>
+    	<md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+	</md-dialog-actions>
+</md-dialog>

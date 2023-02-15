@@ -1,0 +1,107 @@
+<div layout="row" layout-wrap="">
+<div flex="100" align="right" style="background-color:efefef;">
+  <md-button class="md-raised md-primary" ng-click="today()">Today</md-button>
+  <md-button class="md-raised md-primary"ng-click="week()">This Week</md-button>
+  <md-button class="md-raised md-primary"ng-click="month()">This Month</md-button>
+  <md-button class="md-raised md-primary"ng-click="year()">This Financial Year</md-button>
+</div>
+  <div flex="25">
+     <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <span class="blue-theme-color"><md-icon>money</md-icon></span>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">TOTAL PURCHASE</span>
+            <span class="md-subhead">By Amount</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <h1>&#2547; {{purchase_balance | number : 2}} </h1>
+        </md-card-content>
+      </md-card>
+  </div>
+  <div flex="25">
+       <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <span class="blue-theme-color"><md-icon>shopping_cart</md-icon></span>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">TOTAL SALES</span>
+            <span class="md-subhead">By Amount</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <h1>&#2547; {{sale_balance | number : 2}} </h1>
+        </md-card-content>
+      </md-card>
+  </div>
+  <div flex="25">
+    <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <span class="blue-theme-color"><md-icon>info</md-icon></span>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">PURCHASE DUE</span>
+            <span class="md-subhead">By Amount</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <h1>&#2547; {{purchase_balance-p_paid | number : 2}} </h1>
+        </md-card-content>
+      </md-card>
+  </div>
+  <div flex="25">
+      <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <span class="blue-theme-color"><md-icon>priority_high</md-icon></span>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">SALE DUE</span>
+            <span class="md-subhead">By Amount</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <h1>&#2547; {{sale_balance-s_paid | number : 2}} </h1>
+        </md-card-content>
+      </md-card>
+  </div>
+  <div flex="100">
+   <h2>Purchase last 30 days</h2>
+    <canvas id="line" class="chart chart-line" chart-data="pdata"
+     chart-labels="labels" chart-series="series" chart-options="options"
+      chart-dataset-override="datasetOverride" chart-click="onClick">
+    </canvas>
+  </div>
+  <div flex="100">
+   <h2>Sale last 30 days</h2>
+    <canvas id="line" class="chart chart-line" chart-data="sdata"
+     chart-labels="labels" chart-series="series" chart-options="options"
+      chart-dataset-override="datasetOverride" chart-click="onClick">
+    </canvas>
+  </div>
+  <div flex="100">
+    <h2>Best selling product</h2>
+    <canvas id="bar" class="chart chart-bar"
+     chart-data="barData" chart-labels="barLabels"> chart-series="series"
+   </canvas>
+  </div>
+  <div flex="60">
+    <h3>Purchase VS Sale VS Expense</h3>
+    <canvas id="pie" class="chart chart-pie"
+     chart-data="pieData" chart-labels="pieLabels" chart-options="pieOptions">
+   </canvas> 
+  </div>
+  <div flex="40">
+    <h3>Business Summary</h3>
+    <div layout="row" layout-wrap="">
+      <div flex="50"><b>Total Customer:</b></div>
+      <div flex="50" align="right">{{customer[0]}}</div>
+      <div flex="50"><b>Total Supplier:</b></div>
+      <div flex="50" align="right">{{supplier[0]}}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div layout="column" layout-align="space-between strech" ng-show="employeePrivileges.readMediaAndDocSettings">
+	<md-toolbar class="md-table-toolbar md-default">
+		<div class="md-toolbar-tools">
+			<h2 class="md-title">{{ 'UPLOAD_FILE' | translate }}</h2>
+			<md-button class="md-icon-button" ng-click="reLoadStuff()">
+			<md-icon>refresh</md-icon> </md-button>
+			<div flex></div>
+		</div>
+	</md-toolbar>
+	<md-progress-linear md-mode="indeterminate" ng-show="showProgressBar"></md-progress-linear>
+	<md-card class="md-whiteframe-5dp">
+		<md-card-content>
+
+			<div flex>
+				<form novalidate name="companyLogoAndImageSettingsForm" ng-submit="addItem($event)">
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline">{{'IMAGE_AND_LOGO_SETTINGS' | translate}}</span>
+						</md-card-title-text>
+					</md-card-title>
+					<md-divider/>
+					<md-card-content>
+						<div layout="row" layout-wrap="">
+						    <div flex="40"> 
+						    	view image 1
+						    </div>
+						    <div flex="60">
+								<label>Select Logo</label>
+								<md-input-container class="md-block" flex="100">
+									<input id="file" name="document.file" file-model="document.file" ng-model="document.file" type="file"/> <!-- required -->
+									<div ng-messages="companyLogoAndImageSettingsForm.file.$error">
+										<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+									</div>
+								</md-input-container>
+						    </div>
+						</div>
+					</md-card-content>
+					<div layout="row" ng-show="employeePrivileges.createMediaAndDocSettings || employeePrivileges.updateMediaAndDocSettings>
+						<md-button type="submit" class="md-raised md-primary" flex="100">{{'SUBMIT' | translate}}</md-button>
+					</div>
+				</form>
+			</div>
+		</md-card-content>
+	</md-card>
+</div>

@@ -1,0 +1,331 @@
+<md-dialog add-item-dialog flex>
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{'ADD' | translate}}-{{'LEDGER' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp; {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.addItem()">
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'LEDGER' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'NAME' | translate}}</label>
+							<input name="accountName" ng-model="ledger.accountName" type="text" required>
+							<div ng-messages="item.form.accountName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ALIUS' | translate}}</label>
+							<input name="alius" ng-model="ledger.alius" type="text" required>
+							<div ng-messages="item.form.alius.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'PARENT' | translate}}</label>
+							<md-select name="parentAccount" ng-model="ledger.parentAccount"  type="text" required>
+						  		<md-option ng-value="p" ng-repeat="p in parents.content">{{p.name}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.parentAccount.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'LEDGER_GROUP' | translate}}</label>
+							<md-select name="accountGroup" ng-model="ledger.accountGroup"  type="text" multiple required>
+						  		<md-option ng-value="g" ng-repeat="g in group.content">{{g.name}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.accountGroup.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CREATION_DATE' | translate}}</label>
+							<md-datepicker name="creationDate" ng-model="ledger.creationDate"required/>
+							<div ng-messages="item.form.creationDate.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'OPENING_BALANCE' | translate}}</label>
+							<input name="openingBalance" ng-model="ledger.openingBalance" type="text" required>
+							<div ng-messages="item.form.openingBalance.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'FATHER_NAME' | translate}}</label>
+							<input name="fathersName" ng-model="ledger.fathersName" type="text" required>
+							<div ng-messages="item.form.fathersName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'MOTHER_NAME' | translate}}</label>
+							<input name="mothersName" ng-model="ledger.mothersName" type="text" required>
+							<div ng-messages="item.form.mothersName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'SPOUSE_NAME' | translate}}</label>
+							<input name="spouceName" ng-model="ledger.spouceName" type="text">
+							<div ng-messages="item.form.spouceName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{ 'GENDER' | translate }}</label>
+							<md-select placeholder="{{'GENDER' | translate}}" name="gender" ng-model="ledger.gender" type="text" required>
+								<md-option ng-value="gr" ng-repeat="gr in gender.content">{{gr.name}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.gender.$error">
+								<div ng-message="required">This is required.</div>
+							</div>
+						</md-input-container>
+					</div>
+					
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'DATE_OF_BIRTH' | translate}}</label>
+							<md-datepicker name="dob" ng-model="ledger.dob" required/>
+							<div ng-messages="item.form.dob.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'NID' | translate}}</label>
+							<input name="nid" ng-model="ledger.nid" type="text">
+							<div ng-messages="item.form.nid.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					
+					
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'DESCRIPTION' | translate}}</label>
+							<textarea name="description" ng-model="ledger.description" type="text"></textarea>
+							<div ng-messages="item.form.description.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'SET_CREDIT_LIMIT' | translate}}</label>
+							<textarea name="accountLimit" ng-model="ledger.accountLimit" type="text"></textarea>
+							<div ng-messages="item.form.accountLimit.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'CONTACT_INFORMATION' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CONTACT_PERSON_NAME' | translate}}</label>
+							<input name="contactPersonName" ng-model="ledger.accountAddress.contactPersonName" type="text" required>
+							<div ng-messages="item.form.contactPersonName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ADDRESS_LINE_1' | translate}}</label>
+							<input name="addressLine1" ng-model="ledger.accountAddress.addressLine1" type="text" required>
+							<div ng-messages="item.form.addressLine1.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ADDRESS_LINE_2' | translate}}</label>
+							<input name="addressLine2" ng-model="ledger.accountAddress.addressLine2" type="text">
+							<div ng-messages="item.form.addressLine2.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'COUNTRY' | translate}}</label>
+							<md-select placeholder="{{'SELECT_COUNTRY' | translate}}" name="country" ng-model="ledger.accountAddress.addressCountry"  type="text" required>
+							  <md-option ng-value="con" ng-repeat="con in country.content">{{con.niceName}}</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.addressCountry.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CITY' | translate}}</label>
+							<input name="city" ng-model="ledger.accountAddress.city" type="text" required  >
+							<div ng-messages="item.form.city.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ZIP' | translate}}</label>
+							<input name="zip" ng-model="ledger.accountAddress.zip" type="text" >
+							<div ng-messages="item.form.zip.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					
+					
+					<div layout="row">
+						<md-input-container>
+								<label>{{'COUNTRY' | translate}}</label> <md-select
+							placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+							ng-model="ledger.accountAddress.phone.country" type="text"
+							> <md-option ng-value="con"
+							ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+						<div ng-messages="item.form.addressCountry.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+						<label>{{'PHONE' | translate}}</label> <input name="phone"
+							ng-model="ledger.accountAddress.phone.number" type="text">
+						<div ng-messages="item.form.phone.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+						<md-input-container> 		
+						<label>{{'COUNTRY' | translate}}</label> <md-select
+							placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+							ng-model="ledger.accountAddress.fax.country" type="text"
+							> <md-option ng-value="con"
+							ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+						<div ng-messages="item.form.addressCountry.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+						<label>{{'FAX' | translate}}</label> <input name="fax"
+							ng-model="ledger.accountAddress.fax.number" type="text">
+						<div ng-messages="item.form.fax.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+					</div>
+					
+					<div layout="row">
+						<md-input-container>
+						<label>{{'COUNTRY' | translate}}</label> <md-select
+							placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+							ng-model="ledger.accountAddress.mobilePhone.country" type="text"
+							> <md-option ng-value="con"
+							ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+						<div ng-messages="item.form.addressCountry.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+						<label>{{'MOBILE' | translate}}</label> <input name="mobilePhone"
+							ng-model="ledger.accountAddress.mobilePhone.number" type="text"
+							required>
+						<div ng-messages="item.form.mobilePhone.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+						<md-input-container> 
+						<label>{{'COUNTRY' | translate}}</label> <md-select
+							placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+							ng-model="ledger.accountAddress.altMobilePhone.country" type="text"
+							> <md-option ng-value="con"
+							ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+						<div ng-messages="item.form.addressCountry.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+						<label>{{'ALT_MOBILE' | translate}}</label> <input
+							name="altMobilePhone"
+							ng-model="ledger.accountAddress.altMobilePhone.number" type="text">
+						<div ng-messages="item.form.altMobilePhone.$error">
+							<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+								translate}}</div>
+						</div>
+						</md-input-container>
+					</div>
+					
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'EMAIL' | translate}}</label>
+							<input name="email" ng-model="ledger.accountAddress.email" type="text" placeholder="must be unique email" required>
+							<div ng-messages="item.form.email.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'WEBSITE' | translate}}</label>
+							<input name="website" ng-model="ledger.accountAddress.website" type="text">
+							<div ng-messages="item.form.website.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+					 <md-checkbox ng-model="ledger.sendSMS" ng-init="ledger.sendSMS=true" aria-label="Send Welcome SMS">
+                        Send Welcome SMS
+                     </md-checkbox>
+
+					</div>
+				</md-card-content>
+			</md-card>
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid">{{'ADD' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,53 @@
+2021-01-04 00:14:01.216  INFO 1116 --- [main] c.t.tigererp.TigerErpApplication         : Starting TigerErpApplication on DESKTOP-C1C7F5L with PID 1116 (D:\prof\workspace\tigererp\target\classes started by abir0 in D:\prof\workspace\tigererp)
+2021-01-04 00:14:01.242  INFO 1116 --- [main] c.t.tigererp.TigerErpApplication         : No active profile set, falling back to default profiles: default
+2021-01-04 00:14:02.869  INFO 1116 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-01-04 00:14:03.171  INFO 1116 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 292ms. Found 32 repository interfaces.
+2021-01-04 00:14:03.695  INFO 1116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$296415c3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-01-04 00:14:04.296  INFO 1116 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-04 00:14:04.334  INFO 1116 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-04 00:14:04.334  INFO 1116 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-01-04 00:14:04.434  INFO 1116 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_241\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk1.8.0_241/bin/../jre/bin/server;C:/Program Files/Java/jdk1.8.0_241/bin/../jre/bin;C:/Program Files/Java/jdk1.8.0_241/bin/../jre/lib/amd64;C:\Python39\Scripts\;C:\Python39\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;%M2_HOME%\bin;C:\Program Files\Java\jdk1.8.0_241\bin;C:\Program Files\Apache Software Foundation\apache-maven-3.6.3\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\abir0\AppData\Local\Microsoft\WindowsApps;;C:\Users\abir0\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\abir0\AppData\Roaming\npm;D:\eclipse-jee-oxygen-2-win32-x86_64\eclipse;;.]
+2021-01-04 00:14:04.825  INFO 1116 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-01-04 00:14:04.827  INFO 1116 --- [main] o.a.c.c.C.[.[localhost].[/client1]       : Initializing Spring embedded WebApplicationContext
+2021-01-04 00:14:04.827  INFO 1116 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3378 ms
+2021-01-04 00:14:05.079  INFO 1116 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-04 00:14:05.294  INFO 1116 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-04 00:14:05.426  INFO 1116 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-01-04 00:14:05.622  INFO 1116 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2021-01-04 00:14:05.622  INFO 1116 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2021-01-04 00:14:05.843  INFO 1116 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-01-04 00:14:06.095  INFO 1116 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-01-04 00:14:08.763  INFO 1116 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-04 00:14:09.342  INFO 1116 --- [main] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2021-01-04 00:14:10.432  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.591  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.775  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.775  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.775  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.805  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.815  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.815  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:10.815  INFO 1116 --- [main] c.t.t.controller.AbstractController      : Call Abstract Controller
+2021-01-04 00:14:11.137  INFO 1116 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3183a37c, org.springframework.security.web.context.SecurityContextPersistenceFilter@3b663112, org.springframework.security.web.header.HeaderWriterFilter@43edd2ea, org.springframework.security.web.authentication.logout.LogoutFilter@71b32407, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@72d7afff, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@270ab7bc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4acdf6e7, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@311453ab, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@31a80c88, org.springframework.security.web.session.SessionManagementFilter@4cd9ee2c, org.springframework.security.web.access.ExceptionTranslationFilter@140cfc5f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5a8835c6]
+2021-01-04 00:14:11.399  INFO 1116 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-04 00:14:11.467  WARN 1116 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-04 00:14:11.680  INFO 1116 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-01-04 00:14:11.882  INFO 1116 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/client1'
+2021-01-04 00:14:11.882  INFO 1116 --- [main] c.t.tigererp.TigerErpApplication         : Started TigerErpApplication in 11.229 seconds (JVM running for 11.739)
+2021-01-04 00:14:17.144  INFO 1116 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/client1]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-01-04 00:14:17.144  INFO 1116 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-01-04 00:14:17.161  INFO 1116 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
+2021-01-04 00:14:26.786  INFO 1116 --- [http-nio-8080-exec-8] c.t.tigererp.controller.LoginController  : Redirecting to Employee Dashboard
+2021-01-04 00:14:27.809  INFO 1116 --- [http-nio-8080-exec-4] c.t.t.c.report.DashboardController       : Entering GET method
+2021-01-04 00:14:27.828  INFO 1116 --- [http-nio-8080-exec-2] c.t.t.s.financial.LedgerAccountsService  : Entering findAllBySortAndOrder Method
+2021-01-04 00:14:27.828  INFO 1116 --- [http-nio-8080-exec-10] c.t.t.s.financial.LedgerAccountsService  : Entering findAllBySortAndOrder Method
+2021-01-04 00:14:27.829  INFO 1116 --- [http-nio-8080-exec-3] c.t.t.s.financial.LedgerAccountsService  : Entering findAllBySortAndOrder Method
+2021-01-04 00:14:27.858  INFO 1116 --- [http-nio-8080-exec-4] c.t.t.s.org.inventory.OrderService       : Entering findAllBySortAndOrder Method
+2021-01-04 00:14:27.940  INFO 1116 --- [http-nio-8080-exec-5] c.t.t.c.report.DashboardController       : Entering GET method
+2021-01-04 00:14:27.942  INFO 1116 --- [http-nio-8080-exec-5] c.t.t.s.org.inventory.OrderService       : Entering findAllBySortAndOrder Method
+2021-01-04 00:14:27.960  INFO 1116 --- [http-nio-8080-exec-6] c.t.t.c.report.DashboardController       : Entering GET method
+2021-01-04 00:14:27.961  INFO 1116 --- [http-nio-8080-exec-6] c.t.t.s.org.inventory.OrderService       : Entering findAllBySortAndOrder Method
+2021-01-04 00:14:27.982  INFO 1116 --- [http-nio-8080-exec-7] c.t.t.c.report.DashboardController       : Entering GET method
+2021-01-04 00:14:27.995  INFO 1116 --- [http-nio-8080-exec-8] c.t.t.c.report.DashboardController       : Entering GET method

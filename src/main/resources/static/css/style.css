@@ -1,0 +1,22 @@
+.tigererp-row-min-height{
+	min-height: 35px;
+}
+a.tigererp-menu:link { color:#000; text-decoration:none; font-weight:normal; }
+a.tigererp-menu:visited { color: #000; text-decoration:none; font-weight:normal; }
+a.tigererp-menu:hover { color: #000; text-decoration:none; font-weight:normal; }
+a.tigererp-menu:active { color: #000; text-decoration:none; font-weight:normal; }
+
+a.tigererp-anchor:link { color:#000080; text-decoration:none; font-weight:normal; }
+a.tigererp-anchor:visited { color: #000080; text-decoration:none; font-weight:normal; }
+a.tigererp-anchor:hover { color: #000080; text-decoration:underline; font-weight:normal; }
+a.tigererp-anchor:active { color: #000080; text-decoration:none; font-weight:normal; }
+.min-dialog-width { min-width: 750px; }
+
+.right-text-align{
+	text-align: right;
+}
+
+.navbar-topbar-background{ background-color: #dadad8}
+.error-color{color: red;}
+.dashboard-heading-font{font-size: 20px'; font-weight: bold; font-style: normal;color: white;}
+.blue-theme-color{color:#007acc;}

@@ -1,0 +1,352 @@
+<md-dialog add-item-dialog flex>
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{ 'UPDATE' | translate }} {{ 'EMPLOYEE' | translate }}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp; {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.updateItem()">
+	<div layout="row">
+		<md-input-container class="md-block" flex="100">
+		<label>{{ 'FIRST_NAME' | translate }}</label> <input name="firstName"
+			ng-model="user.firstName" type="text" required autofocus>
+		<div ng-messages="item.form.firstName.$error">
+			<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+		</div>
+		</md-input-container>
+		<md-input-container class="md-block" flex="100">
+		<label>{{ 'LAST_NAME' | translate }}</label> <input name="lastName"
+			ng-model="user.lastName" type="text" required>
+		<div ng-messages="item.form.lasttName.$error">
+			<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+		</div>
+		</md-input-container>
+	</div>
+	<div layout="row">
+		<md-input-container class="md-block" flex="100">
+		<label>{{ 'EMAIL' | translate }}</label> <input name="email"
+			ng-model="user.email" type="email" required>
+		<div ng-messages="item.form.email.$error">
+			<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+		</div>
+		</md-input-container>
+	</div>
+	<div layout="row">
+		<md-input-container class="md-block" flex="100">
+		<label>{{ 'COMPANY_ID' | translate }}</label> <input name="companyId"
+			ng-model="user.companyId" type="text" required>
+		<div ng-messages="item.form.companyId.$error">
+			<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+		</div>
+		</md-input-container>
+	</div>
+	<div layout="row">
+		<md-select placeholder="{{ 'SELECT_ROLE' | translate }}" name="empRoleSingle"	ng-model="user.empRoles" style="min-width: 400px;"	> <!--ng-change="onChange(empRoleSingle)"  -->
+		<md-option ng-value="role" ng-repeat="role in empRoles">{{role.roleName}}</md-option>
+		</md-select>
+	</div>
+	<br>
+	
+<!------------------------------------------------   #############     EMPLOYEE INFORMATION         -->
+
+	<md-card-title-text> <span class="md-headline">{{'EMPLOYEE_SETTINGS' | translate}}</span> </md-card-title-text>
+	<md-divider />
+	<br>
+	<div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+				<md-select placeholder="{{ 'SELECT_CATEGORY' | translate }}" name="employeeCategory"	ng-model="user.employee.employeeCategory" style="min-width: 400px;"	>
+				<md-option ng-value="cat" ng-repeat="cat in empCat.content">{{cat.categoryName}}</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'ALIUS' | translate }}</label> <input name="alius"
+				ng-model="user.employee.alius" type="text" required>
+			<div ng-messages="item.form.alius.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'USER_NAME' | translate }}</label> <input name="userName"
+				ng-model="user.employee.userName" type="text" required>
+			<div ng-messages="item.form.userName.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'JOINING_DATE' | translate }}</label> 
+			<md-datepicker name="joiningDate" ng-model="user.employee.joiningDate" required/>
+			<div ng-messages="item.form.joiningDate.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+<!-- <div ng-repeat="r in user.empRoles"> -->
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'BRANCH' | translate }}</label> 
+				<md-select placeholder="{{ 'BRANCH' | translate }}" name="branch" ng-model="user.employee.branch"  type="text" required>
+				  <md-option ng-value="br" ng-selected="{{user.employee.branch.id=br.id}}" ng-repeat="br in branch.content">{{br.branchName}}</md-option>
+				</md-select>
+			</md-input-container>
+<!-- 			</div> -->
+		</div>
+
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'DESCRIPTION' | translate }}</label> 
+			<textarea rows="4" cols="50" name="description"
+				ng-model="user.employee.description" type="text"></textarea>
+			<div ng-messages="item.form.description.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+	
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'DATE_OF_BIRTH' | translate }}</label>
+			<md-datepicker name="dateOfBirth" ng-model="user.employee.dateOfBirth" required/>
+			<div ng-messages="item.form.dateOfBirth.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'GENDER' | translate }}</label>
+			<md-select placeholder="{{'GENDER' | translate}}" name="gender" ng-model="user.employee.gender" type="text" >
+				<md-option ng-value="gr" ng-selected="{{user.employee.gender.id==gr.id}}" ng-repeat="gr in gender.content">{{gr.name}}</md-option>
+			</md-select>
+			<div ng-messages="item.form.gender.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'FATHER_NAME' | translate }}</label> <input name="fathersName"
+				ng-model="user.employee.fatherName" type="text" required>
+			<div ng-messages="item.form.fatherName.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'MOTHER_NAME' | translate }}</label> <input name="motherName"
+				ng-model="user.employee.motherName" type="text" required>
+			<div ng-messages="item.form.motherName.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'SPOUSE_NAME' | translate }}</label> <input name="spouseName"
+				ng-model="user.employee.spouseName" type="text">
+			<div ng-messages="item.form.spouseName.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{ 'NID' | translate }}</label> <input name="nid"
+				ng-model="user.employee.nid" type="text">
+			<div ng-messages="item.form.nid.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row"></div>
+		<br>
+	<!-------------------------------------------------------------  #############      CONTACT INFORMATION         -->
+	
+		<md-card-title-text> <span class="md-headline">{{'CONTACT_INFORMATION'
+			| translate}}</span> </md-card-title-text>
+	
+		<md-divider />
+		<br>
+		<md-card-content ng-repeat= "a in user.employee.employeeAddress">
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'CONTACT_PERSON_NAME' | translate}}</label> <input
+				name="contactPersonName"
+				ng-model="a.contactPersonName"
+				type="text" required>
+			<div ng-messages="companySettingsForm.contactPersonName.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'ADDRESS_LINE_1' | translate}}</label> <input
+				name="addressLine1"
+				ng-model="a.addressLine1" type="text"
+				required>
+			<div ng-messages="item.form.addressLine1.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'ADDRESS_LINE_2' | translate}}</label> <input
+				name="addressLine2"
+				ng-model="a.addressLine2" type="text">
+			<div ng-messages="item.form.addressLine2.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |	translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'COUNTRY' | translate}}</label> <md-select
+				placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+				ng-model="a.addressCountry" type="text"
+				> <md-option ng-value="con" ng-selected="{{a.addressCountry.id==con.id}}"
+				ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+			<div ng-messages="item.form.addressCountry.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'CITY' | translate}}</label> <input name="city"
+				ng-model="a.city" type="text" required>
+			<div ng-messages="item.form.city.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'ZIP' | translate}}</label> <input name="zip"
+				ng-model="a.zip" type="text">
+			<div ng-messages="item.form.zip.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container>
+					<label>{{'COUNTRY' | translate}}</label> <md-select
+				placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+				ng-model="a.phone.country" type="text"
+				> <md-option ng-value="con" ng-selected="{{a.phone.country.id==con.id}}"
+				ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+			<div ng-messages="item.form.addressCountry.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{'PHONE' | translate}}</label> <input name="phone"
+				ng-model="a.phone.number" type="text">
+			<div ng-messages="item.form.phone.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container> 		
+			<label>{{'COUNTRY' | translate}}</label> <md-select
+				placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+				ng-model="a.fax.country" type="text"
+				> <md-option ng-value="con" ng-selected="{{a.fax.country.id==con.id}}"
+				ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+			<div ng-messages="item.form.addressCountry.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{'FAX' | translate}}</label> <input name="fax"
+				ng-model="a.fax.number" type="text">
+			<div ng-messages="item.form.fax.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container>
+			<label>{{'COUNTRY' | translate}}</label> <md-select
+				placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+				ng-model="a.mobilePhone.country" type="text"
+				> <md-option ng-value="con" ng-selected="{{a.mobilePhone.country.id==con.id}}"
+				ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+			<div ng-messages="item.form.addressCountry.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{'MOBILE' | translate}}</label> <input name="mobilePhone"
+				ng-model="a.mobilePhone.number" type="text"
+				required>
+			<div ng-messages="item.form.mobilePhone.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container> 
+			<label>{{'COUNTRY' | translate}}</label> <md-select
+				placeholder="{{'SELECT_COUNTRY' | translate}}" name="country"
+				ng-model="a.altMobilePhone.country" type="text"
+				> <md-option ng-value="con" ng-selected="{{a.altMobilePhone.country.id==con.id}}"
+				ng-repeat="con in country.content">{{con.niceName}}</md-option> </md-select>
+			<div ng-messages="item.form.addressCountry.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{'ALT_MOBILE' | translate}}</label> <input
+				name="altMobilePhone"
+				ng-model="a.altMobilePhone.number" type="text">
+			<div ng-messages="item.form.altMobilePhone.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block" flex="100">
+			<label>{{'EMAIL' | translate}}</label> <input name="email"
+				ng-model="a.email" type="text">
+			<div ng-messages="item.form.email.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+			<md-input-container class="md-block" flex="100">
+			<label>{{'WEBSITE' | translate}}</label> <input name="website"
+				ng-model="a.website" type="text">
+			<div ng-messages="item.form.website.$error">
+				<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' |
+					translate}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		</md-card-content>
+	</div>
+
+</form>
+
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.updateItem()" ng-disabled="item.form.$invalid">{{ 'UPDATE' | translate }} {{ 'EMPLOYEE' | translate }}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{ 'CANCEL' | translate }}</md-button>
+  </md-dialog-actions>
+</md-dialog>

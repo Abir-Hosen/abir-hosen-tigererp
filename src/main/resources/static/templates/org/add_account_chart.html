@@ -1,0 +1,51 @@
+<md-dialog add-item-dialog flex>
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{'ADD_ACCOUNT_CHART' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp; {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.addItem()">
+
+					
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ACCOUNT_CHART_NAME' | translate}}</label>
+							<input name="name" ng-model="accountC.name" type="text" required>
+							<div ng-messages="item.form.name.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'DESCRIPTION' | translate}}</label>
+							<textarea name="description" ng-model="accountC.description" type="text"></textarea>
+							<div ng-messages="item.form.description.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ACCOUNT_EQUATION' | translate}}</label>
+							<md-select placeholder="{{'SELECT_ACCOUNT_EQUATION' | translate}}" name="parentAccount" ng-model="accountC.parentAccount"  type="text" required>
+							  <md-option ng-value="{{parent}}" ng-repeat="parent in response.content">{{parent.name}}</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.addressCountry.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid">{{'ADD_ACCOUNT_CHART' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+</md-dialog>

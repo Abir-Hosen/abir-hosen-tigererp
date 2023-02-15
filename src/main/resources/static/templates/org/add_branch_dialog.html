@@ -1,0 +1,171 @@
+<md-dialog add-item-dialog flex>
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{'ADD_BRANCH' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;{{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.addItem()">
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'BRANCH_SETTINGS' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'BRANCH_NAME' | translate}}</label>
+							<input name="branchName" ng-model="branch.branchName" type="text" required>
+							<div ng-messages="item.form.branchName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ALIUS' | translate}}</label>
+							<input name="alius" ng-model="branch.alius" type="text" required>
+							<div ng-messages="item.form.alius.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'DESCRIPTION' | translate}}</label>
+							<textarea name="description" ng-model="branch.description" type="text"></textarea>
+							<div ng-messages="item.form.description.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{'CONTACT_INFORMATION' | translate}}</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-divider/>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CONTACT_PERSON_NAME' | translate}}</label>
+							<input name="contactPersonName" ng-model="branch.branchAddress.contactPersonName" type="text" required>
+							<div ng-messages="item.form.contactPersonName.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ADDRESS_LINE_1' | translate}}</label>
+							<input name="addressLine1" ng-model="branch.branchAddress.addressLine1" type="text" required>
+							<div ng-messages="item.form.addressLine1.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ADDRESS_LINE_2' | translate}}</label>
+							<input name="addressLine2" ng-model="branch.branchAddress.addressLine2" type="text">
+							<div ng-messages="item.form.addressLine2.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'COUNTRY' | translate}}</label>
+							<md-select placeholder="{{'SELECT_COUNTRY' | translate}}" name="country" ng-model="branch.branchAddress.addressCountry"  type="text" required>
+							  <md-option ng-value="con" ng-repeat="con in response.content">{{con.niceName}}</md-option>
+							</md-select>
+							<div ng-messages="companySettingsForm.addressCountry.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'CITY' | translate}}</label>
+							<input name="city" ng-model="branch.branchAddress.city" type="text" required  >
+							<div ng-messages="item.form.city.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ZIP' | translate}}</label>
+							<input name="zip" ng-model="branch.branchAddress.zip" type="text" >
+							<div ng-messages="item.form.zip.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'PHONE' | translate}}</label>
+							<input name="phone" ng-model="branch.branchAddress.phone" type="text">
+							<div ng-messages="item.form.phone.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'FAX' | translate}}</label>
+							<input name="fax" ng-model="branch.branchAddress.fax" type="text">
+							<div ng-messages="item.form.fax.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">	
+						<md-input-container class="md-block" flex="100">
+							<label>{{'MOBILE' | translate}}</label>
+							<input name="mobilePhone" ng-model="branch.branchAddress.mobilePhone" type="text" required>
+							<div ng-messages="item.form.mobilePhone.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ALT_MOBILE' | translate}}</label>
+							<input name="altMobilePhone" ng-model="branch.branchAddress.altMobilePhone" type="text">
+							<div ng-messages="item.form.altMobilePhone.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'EMAIL' | translate}}</label>
+							<input name="email" ng-model="branch.branchAddress.email" type="text">
+							<div ng-messages="item.form.email.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'WEBSITE' | translate}}</label>
+							<input name="website" ng-model="branch.branchAddress.website" type="text">
+							<div ng-messages="item.form.website.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid">{{'ADD_BRANCH' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+</md-dialog>

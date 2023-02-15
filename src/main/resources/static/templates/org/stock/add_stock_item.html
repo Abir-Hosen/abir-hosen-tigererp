@@ -1,0 +1,120 @@
+<md-dialog add-item-dialog style="min-width:60%;">
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{'ADD_STOCK_ITEM' | translate}}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form name="item.form" ng-submit="ctrl.addItem()">
+			<md-card>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ITEM_NAME' | translate}}</label>
+							<input name="name" ng-model="items.name" type="text" required>
+							<div ng-messages="item.form.name.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'ALIUS' | translate}}</label>
+							<input name="alius" ng-model="items.alius" type="text" required>
+							<div ng-messages="item.form.alius.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'REORDER_QUANTITY' | translate}}</label>
+							<input name="reOrderQuantity" ng-model="items.reOrderQuantity" type="number" required>
+							<div ng-messages="item.form.reOrderQuantity.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'UNIT' | translate}}</label>
+							<md-select name="unit" ng-model="items.unit" type="text" required>
+								<md-option ng-value="">No Value</md-option>
+								<md-option ng-value="unit" ng-repeat="unit in units.content">{{unit.symbol}}{{unit.firstUnit.symbol}} <span ng-show="{{unit.value}}">Of</span> {{unit.value}} {{unit.secondUnit.symbol}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.stockGroup.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'SALE_ONLINE' | translate}}</label>
+							<md-select name="saleOnline" ng-model="items.saleOnline" type="text" required>
+								<md-option ng-value="true">YES</md-option>
+								<md-option ng-value="false">No</md-option>
+							</md-select>
+							<div ng-messages="item.form.saleOnline.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'MAINTAIN_BRANCH' | translate}}</label>
+							<md-select name="mainTainInBatch" ng-model="items.mainTainInBatch" type="text" required>
+								<md-option ng-value="true">YES</md-option>
+								<md-option ng-value="false">No</md-option>
+							</md-select>
+							<div ng-messages="item.form.mainTainInBatch.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'STOCK_CATEGORY' | translate}}</label>
+							<md-select name="stockCategory" ng-model="items.stockCategory" type="text" multiple >
+								<md-option ng-value="">No Value</md-option>
+								<md-option ng-value="cat" ng-repeat="cat in categories.content">{{cat.name}}</md-option>
+							</md-select>
+							<div ng-messages="item.form.stockCategory.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'SELLING_PRICE' | translate}}</label>
+							<input name="sellingPrice" ng-model="items.sellingPrice" type="number" required>
+							<div ng-messages="item.form.sellingPrice.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block" flex="100">
+							<label>{{'MINIMUM_SELLING_PRICE' | translate}}</label>
+							<input name="minimumSellingPrice" ng-model="items.minimumSellingPrice" type="number" required>
+							<div ng-messages="item.form.minimumSellingPrice.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container class="md-block" flex="100">
+							<label>{{'DESCRIPTION' | translate}}</label>
+							<textarea name="description" rows="4" ng-model="items.description" type="text"></textarea>
+							<div ng-messages="item.form.description.$error">
+								<div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+							</div>
+						</md-input-container>
+					</div>
+				</md-card-content>
+			</md-card>
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid">{{'ADD_ITEM' | translate}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()">{{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+</md-dialog>

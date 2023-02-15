@@ -1,0 +1,561 @@
+<div layout="column" layout-align="space-between strech" id="popupContainer" ng-show="employeePrivileges.readAccessPermissionSettings" style="margin-left: 15px">
+  <div>
+    <md-toolbar class="md-table-toolbar md-default">
+     <div class="md-toolbar-tools">
+      <h2 class="md-title">{{ 'EMPLOYEE_ACCESS_PERMISSION' | translate }}</h2>
+     <div flex></div>
+  </div>
+   </md-toolbar>
+  </div>
+  <div>
+     
+  </div>
+  <div>
+    <form novalidate name="form" ng-submit="addItem($event)">
+    <md-select placeholder="Select a Role" name="employeeRole" ng-model="employeeRole" style="min-width: 200px;" required ng-change="onChange(employeeRole.id)">
+      <md-option ng-value="role" ng-repeat="role in response.content">{{role.roleName}}</md-option>
+    </md-select>
+  </div>
+  <div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'EMPLOYEE_ROLE' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createRole" aria-label="createRole">
+            {{ 'ROLE' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readRole" aria-label="createRole">
+            {{ 'ROLE' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateRole" aria-label="createRole">
+           {{ 'ROLE' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteRole" aria-label="createRole">
+            {{ 'ROLE' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'EMPLOYEE_CATEGORY' | translate }}</div>
+      
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createEmployeeCategory">
+            {{ 'EMPLOYEE_CATEGORY' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readEmployeeCategory">
+            {{ 'EMPLOYEE_CATEGORY' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateEmployeeCategory">
+            {{ 'EMPLOYEE_CATEGORY' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteEmployeeCategory">
+            {{ 'EMPLOYEE_CATEGORY' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'EMPLOYEE' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createEmployee">
+            {{ 'EMPLOYEE' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readEmployee">
+            {{ 'EMPLOYEE' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateEmployee">
+            {{ 'EMPLOYEE' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteEmployee">
+            {{ 'EMPLOYEE' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'COMPANY_SETTINGS' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createCompanySettings">
+            {{ 'COMPANY_SETTINGS' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readCompanySettings">
+            {{ 'COMPANY_SETTINGS' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateCompanySettings">
+            {{ 'COMPANY_SETTINGS' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteCompanySettings">
+            {{ 'COMPANY_SETTINGS' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'MEDIA_AND_DOCUMENT' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createMediaAndDocSettings">
+            {{ 'MEDIA_AND_DOCUMENT' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readMediaAndDocSettings">
+            {{ 'MEDIA_AND_DOCUMENT' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateMediaAndDocSettings">
+            {{ 'MEDIA_AND_DOCUMENT' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteMediaAndDocSettings">
+            {{ 'MEDIA_AND_DOCUMENT' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'STOCK_CATEGORY' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createStockCategory">
+            {{ 'STOCK_CATEGORY' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readStockCategory">
+            {{ 'STOCK_CATEGORY' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateStockCategory">
+            {{ 'STOCK_CATEGORY' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteStockCategory">
+            {{ 'STOCK_CATEGORY' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'UNIT' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createUnitMeasure">
+            {{ 'UNIT' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readUnitMeasure">
+            {{ 'UNIT' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateUnitMeasure">
+            {{ 'UNIT' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteUnitMeasure">
+            {{ 'UNIT' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'BRANCH_SETTINGS' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createBranchSettings">
+            {{ 'BRANCH_SETTINGS' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readBranchSettings">
+            {{ 'BRANCH_SETTINGS' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateBranchSettings">
+            {{ 'BRANCH_SETTINGS' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteBranchSettings">
+            {{ 'BRANCH_SETTINGS' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'ROOM_SETTINGS' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createRoomSettings">
+            {{ 'ROOM_SETTINGS' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readRoomSettings">
+            {{ 'ROOM_SETTINGS' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateRoomSettings">
+            {{ 'ROOM_SETTINGS' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteRoomSettings">
+            {{ 'ROOM_SETTINGS' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      
+      <!-- NEW -->
+      
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'INVOICE' | translate }}</div>
+      <div layout="row" class="input-row">
+          <md-checkbox ng-model="accessPermission.readInvoiceSettings">
+            {{ 'INVOICE' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+      </div>
+      
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'ALL_ORDER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createAllOrderSettings">
+            {{ 'ALL_ORDER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readAllOrderSettings">
+            {{ 'ALL_ORDER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateAllOrderSettings">
+            {{ 'ALL_ORDER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteAllOrderSettings">
+            {{ 'ALL_ORDER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'PURCHASE_ORDER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createPurchaseOrderSettings">
+            {{ 'PURCHASE_ORDER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readPurchaseOrderSettings">
+            {{ 'PURCHASE_ORDER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updatePurchaseOrderSettings">
+            {{ 'PURCHASE_ORDER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deletePurchaseOrderSettings">
+            {{ 'PURCHASE_ORDER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'SALE_ORDER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createSaleOrderSettings">
+            {{ 'SALE_ORDER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readSaleOrderSettings">
+            {{ 'SALE_ORDER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateSaleOrderSettings">
+            {{ 'SALE_ORDER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteSaleOrderSettings">
+            {{ 'SALE_ORDER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'CANCEL_PURCHASE_ORDER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createCancelPurchaseOrderSettings">
+            {{ 'CANCEL_PURCHASE_ORDER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readCancelPurchaseOrderSettings">
+            {{ 'CANCEL_PURCHASE_ORDER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateCancelPurchaseOrderSettings">
+            {{ 'CANCEL_PURCHASE_ORDER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteCancelPurchaseOrderSettings">
+            {{ 'CANCEL_PURCHASE_ORDER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'CANCEL_SALE_ORDER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createCancelSaleOrderSettings">
+            {{ 'CANCEL_SALE_ORDER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readCancelSaleOrderSettings">
+            {{ 'CANCEL_SALE_ORDER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateCancelSaleOrderSettings">
+            {{ 'CANCEL_SALE_ORDER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteCancelSaleOrderSettings">
+            {{ 'CANCEL_SALE_ORDER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      
+      <!--  -->
+      
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'LEDGER_ENTRIES' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createLedgerEntriesSettings">
+            {{ 'LEDGER_ENTRIES' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readLedgerEntriesSettings">
+            {{ 'LEDGER_ENTRIES' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateLedgerEntriesSettings">
+            {{ 'LEDGER_ENTRIES' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteLedgerEntriesSettings">
+            {{ 'LEDGER_ENTRIES' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'ALL_VOUCHER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createAllVoucherSettings">
+            {{ 'ALL_VOUCHER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readAllVoucherSettings">
+            {{ 'ALL_VOUCHER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateAllVoucherSettings">
+            {{ 'ALL_VOUCHER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteAllVoucherSettings">
+            {{ 'ALL_VOUCHER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'RECEPIENT_VOUCHER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createRecepientVoucherSettings">
+            {{ 'RECEPIENT_VOUCHER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readRecepientVoucherSettings">
+            {{ 'RECEPIENT_VOUCHER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateRecepientVoucherSettings">
+            {{ 'RECEPIENT_VOUCHER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteRecepientVoucherSettings">
+            {{ 'RECEPIENT_VOUCHER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'PAYMENT_VOUCHER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createPaymentVoucherSettings">
+            {{ 'PAYMENT_VOUCHER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readPaymentVoucherSettings">
+            {{ 'PAYMENT_VOUCHER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updatePaymentVoucherSettings">
+            {{ 'PAYMENT_VOUCHER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deletePaymentVoucherSettings">
+            {{ 'PAYMENT_VOUCHER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'CONTRA_VOUCHER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createContraVoucherSettings">
+            {{ 'CONTRA_VOUCHER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readContraVoucherSettings">
+            {{ 'CONTRA_VOUCHER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateContraVoucherSettings">
+            {{ 'CONTRA_VOUCHER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteContraVoucherSettings">
+            {{ 'CONTRA_VOUCHER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'EXPENSE_VOUCHER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createExpenseVoucherSettings">
+            {{ 'EXPENSE_VOUCHER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readExpenseVoucherSettings">
+            {{ 'EXPENSE_VOUCHER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateExpenseVoucherSettings">
+            {{ 'EXPENSE_VOUCHER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteExpenseVoucherSettings">
+            {{ 'EXPENSE_VOUCHER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'JOURNAL_VOUCHER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createJournalVoucherSettings">
+            {{ 'JOURNAL_VOUCHER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readJournalVoucherSettings">
+            {{ 'JOURNAL_VOUCHER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateJournalVoucherSettings">
+            {{ 'JOURNAL_VOUCHER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteJournalVoucherSettings">
+            {{ 'JOURNAL_VOUCHER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'CHART_OF_ACCOUNTING' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createChartOfAccountingSettings">
+            {{ 'CHART_OF_ACCOUNTING' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readChartOfAccountingSettings">
+            {{ 'CHART_OF_ACCOUNTING' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateChartOfAccountingSettings">
+            {{ 'CHART_OF_ACCOUNTING' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteChartOfAccountingSettings">
+            {{ 'CHART_OF_ACCOUNTING' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'LEDGER_GROUP_SETTINGS' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createLedgerGroupSettings">
+            {{ 'LEDGER_GROUP_SETTINGS' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readLedgerGroupSettings">
+            {{ 'LEDGER_GROUP_SETTINGS' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateLedgerGroupSettings">
+            {{ 'LEDGER_GROUP_SETTINGS' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteLedgerGroupSettings">
+            {{ 'LEDGER_GROUP_SETTINGS' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'LEDGER' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createLedgerSettings">
+            {{ 'LEDGER' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readLedgerSettings">
+            {{ 'LEDGER' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateLedgerSettings">
+            {{ 'LEDGER' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteLedgerSettings">
+            {{ 'LEDGER' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'BALANCE_SHEET' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createBalanceSheetSettings">
+            {{ 'BALANCE_SHEET' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readBalanceSheetSettings">
+            {{ 'BALANCE_SHEET' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateBalanceSheetSettings">
+            {{ 'BALANCE_SHEET' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteBalanceSheetSettings">
+            {{ 'BALANCE_SHEET' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'STOCK_ITEM' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createStockItemSettings">
+            {{ 'STOCK_ITEM' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readStockItemSettings">
+            {{ 'STOCK_ITEM' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateStockItemSettings">
+            {{ 'STOCK_ITEM' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteStockItemSettings">
+            {{ 'STOCK_ITEM' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'STOCK_IN' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createStockInSettings">
+            {{ 'STOCK_IN' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readStockInSettings">
+            {{ 'STOCK_IN' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateStockInSettings">
+            {{ 'STOCK_IN' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteStockInSettings">
+            {{ 'STOCK_IN' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'STOCK_OUT' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createStockOutSettings">
+            {{ 'STOCK_OUT' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readStockOutSettings">
+            {{ 'STOCK_OUT' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateStockOutSettings">
+            {{ 'STOCK_OUT' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteStockOutSettings">
+            {{ 'STOCK_OUT' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'PRODUCTION' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createProductionSettings">
+            {{ 'PRODUCTION' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readProductionSettings">
+            {{ 'PRODUCTION' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateProductionSettings">
+            {{ 'PRODUCTION' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteProductionSettings">
+            {{ 'PRODUCTION' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'CONSUMPTION' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createConsumptionSettings">
+            {{ 'CONSUMPTION' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readConsumptionSettings">
+            {{ 'CONSUMPTION' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateConsumptionSettings">
+            {{ 'CONSUMPTION' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteConsumptionSettings">
+            {{ 'CONSUMPTION' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'OTHERS' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.readProfitLossStatementSettings">
+            {{ 'PROFIT_LOSS' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readStockRecordBookSettings">
+            {{ 'STOCK_RECORD' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateGlobalPasswordSettings">
+            {{ 'GLOBAL_PASSWORD' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readSmsSettings">
+            {{ 'SMS' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+      </div>
+       <div layout="row"> &nbsp; </div>
+      <div layout="row" class="tigererp-row-min-height">{{ 'ACCESS_PERMISSION' | translate }}</div>
+      <div layout="row" class="input-row">
+           <md-checkbox ng-model="accessPermission.createAccessPermissionSettings">
+            {{ 'ACCESS_PERMISSION' | translate }}-{{ 'CREATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.readAccessPermissionSettings">
+            {{ 'ACCESS_PERMISSION' | translate }}-{{ 'READ' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.updateAccessPermissionSettings">
+            {{ 'ACCESS_PERMISSION' | translate }}-{{ 'UPDATE' | translate }}
+          </md-checkbox>
+          <md-checkbox ng-model="accessPermission.deleteAccessPermissionSettings">
+            {{ 'ACCESS_PERMISSION' | translate }}-{{ 'DELETE' | translate }}
+          </md-checkbox>
+      </div>
+      
+      <div layout="row" class="input-row">
+
+      </div>
+      <div layout="row" class="input-row" ng-show="employeePrivileges.createAccessPermissionSettings || employeePrivileges.updateAccessPermissionSettings || employeePrivileges.deleteAccessPermissionSettings">
+         <md-button class="md-raised md-primary" ng-click="addItem($event)" ng-disabled="form.$invalid">{{ 'PERMISSION_SET' | translate }}</md-button>
+        <!-- 
+        <md-button class="md-raised md-primary" ng-click="deleteItem($event)">Revoke All And Delete</md-button>
+         -->
+      </div>
+    </form>
+    
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div layout="column" layout-align="space-between strech" ng-show="employeePrivileges.readEmployeeCategory">
+<div>
+    <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
+  <div class="md-toolbar-tools">
+    <h2 class="md-title">{{'EMPLOYEE_CATEGORY' | translate}}</h2>
+                <md-button class="md-icon-button" ng-click="reLoadStuff()">
+              <md-icon>refresh</md-icon>
+            </md-button>
+    <div flex></div>
+    <md-button class="md-icon-button" ng-click="filter.show = true">
+      <md-icon>search</md-icon>
+    </md-button>
+    <md-button class="md-icon-button" ng-click="addItem($event)" ng-show="employeePrivileges.createEmployeeCategory">
+      <md-icon>add_circleg</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="md-table-toolbar md-default" ng-show="filter.show && !selected.length">
+  <div class="md-toolbar-tools">
+    <md-icon>search</md-icon>
+    <form flex name="filter.form">
+      <input type="text" ng-model="query.filter" ng-model-options="filter.options" placeholder="search by Name/by Id">
+    </form>
+    <md-button class="md-icon-button" ng-click="removeFilter()">
+      <md-icon>close</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+  <div class="md-toolbar-tools" layout-align="space-between center">
+    <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
+    <md-button class="md-icon-button" ng-click="delete($event)">
+      <md-icon>delete</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+</div>
+ 
+ <div>
+	<md-content flex layout-padding>
+	  	<md-table-container>
+  <div style="overflow: auto; max-height: 100%;">
+  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+    <thead fix-head md-head md-order="query.order" md-on-reorder="getResponse">
+      <tr md-row>
+        <th class="my-data-table-id" md-column md-numeric md-order-by="id"><span>Id</span></th>
+        <th class="my-data-table-name" md-column md-order-by="categoryName"><span>{{'CATEGORY' | translate}} {{'NAME' | translate}}</span></th>
+        <th class="my-data-table-desc" md-column>{{'CATEGORY' | translate}} {{'DESCRIPTION' | translate}}</th>
+        <th class="my-data-table-action" md-column>{{'ACTION' | translate}}</th>
+      </tr>
+    </thead>
+
+    <tbody md-body>
+      <tr md-row md-select="row" md-select-id="id"  ng-repeat="row in response.content">
+        <td md-cell class="my-data-table-id">{{row.id}}</td>
+        <td class="my-data-table-name" md-cell>{{row.categoryName}}</td>
+        <td class="my-data-table-desc" md-cell>{{row.categoryDescription}}</td>
+        <td class="my-data-table-action" md-cell>
+          <md-button class="md-icon-button" ng-click="updateItem(row)" ng-show="employeePrivileges.updateEmployeeCategory">
+            <md-icon>edit</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" ng-click="deleteSingleRow(row.id)" ng-show="employeePrivileges.deleteEmployeeCategory">
+            <md-icon>delete</md-icon>
+          </md-button>
+        </td>
+      </tr>  
+    </tbody>
+  </table>
+  </div>
+</md-table-container>
+	</md-content>
+  </div>
+
+	<div>
+	  <md-table-pagination md-limit="query.limit" md-limit-options="pageLimitOption" md-page="query.page" md-total="{{response.totalElements}}" md-on-paginate="getResponse" md-page-select></md-table-pagination>
+	</div>
+</div>

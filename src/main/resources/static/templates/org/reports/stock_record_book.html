@@ -1,0 +1,88 @@
+<div layout="column" layout-align="space-between strech">
+
+	<div>
+		<md-toolbar class="md-table-toolbar md-default"
+			ng-hide="selected.length || filter.show">
+		<div class="md-toolbar-tools"> 
+			<div>
+				<md-input-container class="md-block" flex="100">
+				<label>Select Product:</label>
+					<md-select class="md-subhead" ng-model="id" type="text">
+					  	<md-option class="md-subhead"  ng-click="showItem(0)" ng-value="0" >All Item</md-option>
+					  	<md-option class="md-subhead"  ng-click="showItem(stock[0].id)" ng-value="stock[0].id" ng-repeat="stock in stock_response.content">{{stock[0].name}}</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<md-button class="md-icon-button" ng-click="reLoadStuff()">
+			<md-icon>refresh</md-icon> </md-button>
+			<md-datepicker ng-model="startDate" ng-change="onChangeDate()" md-max-date="maxDate" md-placeholder="{{'FROM' | translate}}"></md-datepicker>
+			<md-datepicker ng-model="endDate" ng-change="onChangeDate()" md-max-date="maxDate" md-placeholder="{{'TO' | translate}}"></md-datepicker>
+			<div flex></div>
+
+		</div>
+		
+		</md-toolbar>
+
+		<md-toolbar class="md-table-toolbar md-default"
+			ng-show="filter.show && !selected.length">
+			
+		<div class="md-toolbar-tools">
+			<md-icon>search</md-icon>
+			<form flex name="filter.form">
+				<input type="text" ng-model="query.filter"
+					ng-model-options="filter.options"
+					placeholder="search by Name/by Id">
+			</form>
+			<md-button class="md-icon-button" ng-click="removeFilter()">
+			<md-icon>close</md-icon> </md-button>
+		</div>
+		
+		</md-toolbar>
+
+		<md-toolbar class="md-table-toolbar alternate"
+			ng-show="selected.length">
+		<div class="md-toolbar-tools" layout-align="space-between center">
+			<div>{{selected.length}} {{selected.length > 1 ? 'items' :
+				'item'}} selected</div>
+			<md-button class="md-icon-button" ng-click="delete($event)">
+			<md-icon>delete</md-icon> </md-button>
+		</div>
+		</md-toolbar>
+	</div>
+	<div>
+		<md-content flex layout-padding> <md-table-container>
+		<div style="overflow: auto; max-height: 100%;">
+			<table md-table multiple ng-model="selected"
+				md-progress="promise">
+				<thead fix-head md-head md-order="query.order"
+					md-on-reorder="getResponse">
+					<tr md-row>
+						<th class="my-data-table-desc" md-column>{{ 'ID' | translate}}</th>
+						<th class="my-data-table-desc" md-column>{{ 'DATE' | translate}}</th>
+						<th class="my-data-table-desc" md-column>{{ 'NAME' | translate}}</th>
+						<th class="my-data-table-desc" md-column>{{ 'TRANSACTION_TYPE' | translate}}</th>
+						<th class="my-data-table-desc" md-column>{{ 'QTY' | translate}}</th>
+						<th class="my-data-table-desc" md-column>{{ 'TOTAL_QTY' | translate}}</th>
+					</tr>
+				</thead>
+
+				<tbody md-body>
+					<tr ng-repeat="res in response.content" md-row md-select="row" md-select-id="id">
+						<td class="my-data-table-desc" md-cell>{{res[0].id}}</td>
+						<td class="my-data-table-desc" md-cell>{{res[1].createdAt | date}}</td>
+						<td class="my-data-table-desc" md-cell>{{res[0].name}}</td>
+						<td class="my-data-table-desc" md-cell>{{res[1].productTransactionEntryType.name}}</td>
+						<td class="my-data-table-desc" md-cell>{{res[1].quantity.toString().split(".")[0]}} {{res[0].unit.symbol}} {{res[0].unit.firstUnit.symbol}} <span ng-show="{{res[0].unit.value}}"><span ng-if="res[1].quantity %1 != 0">{{("."+res[1].quantity.toString().split(".")[1])*res[0].unit.value}}</span> <span ng-if="res[1].quantity %1 == 0">00</span> </span> {{res[0].unit.secondUnit.symbol}} <span ng-show="res[1].quantity==null">0</span></td>
+						<td class="my-data-table-desc" md-cell>{{res[2].toString().split(".")[0]}} {{res[0].unit.symbol}} {{res[0].unit.firstUnit.symbol}} <span ng-show="{{res[0].unit.value}}"><span ng-if="res[2] %1 != 0">{{("."+res[2].toString().split(".")[1])*res[0].unit.value}}</span> <span ng-if="res[2] %1 == 0">00</span> </span> {{res[0].unit.secondUnit.symbol}} <span ng-show="res[2]==null">0</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</md-table-container> </md-content>
+	</div>
+	<div>
+							<md-table-pagination md-limit="query.limit" md-limit-options="[20, 40, 60]" md-page="query.page"
+								md-boundary-links md-total="{{response.totalElements}}" md-on-paginate="getResponse" md-page-select>
+							</md-table-pagination>
+	</div>
+</div>

@@ -1,0 +1,67 @@
+<div layout="column" layout-align="space-between strech">
+	<div>
+		<md-toolbar class="md-table-toolbar md-default"
+			ng-hide="selected.length || filter.show">
+		<div class="md-toolbar-tools">
+		<div><h1>{{'PROFIT_LOSS_STATEMENT' | translate}} &nbsp; &nbsp; &nbsp; </h1></div>
+			<div>
+				<md-input-container class="md-block" flex="100">
+					<md-select class="md-subhead"  ng-model="voucherTypeId" type="text">
+						<md-option class="md-subhead" ng-click="changeVoucher(0)" ng-value="0" ng-selected="true">{{'STOCK_ITEM' | translate}}</md-option>
+					  	<md-option class="md-subhead" ng-click="changeVoucher(items[0].id)" ng-value="{{items[0].id}}" ng-repeat="items in response.content">{{items[0].name}}</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<md-button class="md-icon-button" ng-click="reLoadStuff()">
+			<md-icon>refresh</md-icon> </md-button>
+			<md-datepicker ng-model="startDate" ng-change="changeVoucher(voucherTypeId)" md-max-date="maxDate" md-placeholder="{{'FROM' | translate}}"></md-datepicker>
+			<md-datepicker ng-model="endDate" ng-change="changeVoucher(voucherTypeId)" md-max-date="maxDate" md-placeholder="{{'TO' | translate}}"></md-datepicker>
+			<div flex></div>
+
+		</div>
+		
+		</md-toolbar>
+
+	
+	</div>
+
+	<div>
+		<md-content flex layout-padding> <md-table-container>
+		<div style="overflow: auto; max-height: 100%;">
+			<table md-table multiple ng-model="selected"
+				md-progress="promise">
+				<thead fix-head md-head md-order="query.order"
+					md-on-reorder="getResponse">
+					<tr md-row>
+						<th class="my-data-table-desc" md-column>{{ 'TITLE' | translate}}</th>
+						<th class="my-data-table-desc" md-column>{{ 'AMOUNT' | translate}}</th>
+					</tr>
+				</thead>
+
+				<tbody md-body>
+					<tr height="40">
+						<td class="my-data-table-desc" md-cell>{{'TOTAL_SALE_AMOUNT' | translate}}</td>
+						<td class="my-data-table-desc" md-cell style="text-align: right;">000000000.00</td>
+					</tr>
+					<tr height="40">
+						<td class="my-data-table-desc" md-cell>{{'COST_OF_GOODS_SOLD' | translate}}</td>
+						<td class="my-data-table-desc" md-cell style="text-align: right;">000000000.00</td>
+					</tr>
+					<tr height="40">
+						<td class="my-data-table-desc" md-cell><b>{{'GROSS_PROFIT' | translate}}</b></td>
+						<td class="my-data-table-desc" md-cell style="text-align: right;"><b>000000.00</b></td>
+					</tr>
+					<tr height="50">
+						<td class="my-data-table-desc" md-cell>{{'EXPENSES' | translate}}</td>
+						<td class="my-data-table-desc" md-cell style="text-align: right;">0000.00</td>
+					</tr>
+					<tr height="40">
+						<td class="my-data-table-desc" md-cell><b>{{'NET_PROFIT' | translate}}</b></td>
+						<td class="my-data-table-desc" md-cell style="text-align: right;"><b>0000.00</b></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</md-table-container> </md-content>
+	</div>
+</div>

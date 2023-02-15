@@ -1,0 +1,46 @@
+<md-dialog add-item-dialog flex>
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">{{ 'CREATE_STOCK_CATEGORY' | translate }}</h2>
+    
+    <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+      <i class="material-icons">error_outline</i>
+      <span>&nbsp;  {{'ALL_FIELDS_ARE_REQUIRED' | translate}}</span>
+    </p>
+    
+    <form novalidate name="item.form" ng-submit="ctrl.addItem()">
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label> {{'NAME' | translate}}</label>
+          <input name="stockCategorySubmit"  ng-model="stockCategorySubmit.name" md-maxlength="100" required>
+           <div ng-messages="item.form.stockCategorySubmit.$error">
+		    <div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+		  </div>
+      </div>
+        </md-input-container>
+      <div layout="row" class="input-row">
+        <md-input-container flex>
+          <label> {{'ALIUS' | translate}}</label>
+          <input rows="4"  name="alius" ng-model="stockCategorySubmit.alius" md-maxlength="100"></textarea>
+        </md-input-container>
+      </div>
+      <div layout="row" class="input-row">
+        <md-input-container class="md-block" flex="100">
+		 <label> {{'PARENT' | translate}}</label>
+		 <md-select name="parent" ng-model="parent" ng-change="onCategoryChange(parent)" type="text">
+		  <md-option ng-value="cat"  ng-repeat="cat in parentCategories">{{cat.name}}</md-option>
+		 </md-select>
+		 <div ng-messages="item.formaddressCountry.stockCategory.$error">
+		 <div ng-message="required">{{'THIS_FIELD_IS_REQUIRED' | translate}}</div>
+		</div>
+		</md-input-container>
+      </div>
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button class="md-raised md-primary" ng-click="ctrl.addItem()" ng-disabled="item.form.$invalid">{{ 'CREATE_STOCK_CATEGORY' | translate }}</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.cancel()"> {{'CANCEL' | translate}}</md-button>
+  </md-dialog-actions>
+</md-dialog>
